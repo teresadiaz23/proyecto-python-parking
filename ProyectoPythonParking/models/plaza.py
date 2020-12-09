@@ -1,5 +1,5 @@
 class Plaza():
-    def __init__(self, id, tipo_vehiculo, tarifa, ocupada = False, cliente = None):
+    def __init__(self, id, tipo_vehiculo, tarifa, ocupada=False, cliente=None):
         self.__id = id
         self.__tipo_vehiculo = tipo_vehiculo
         self.__tarifa = tarifa

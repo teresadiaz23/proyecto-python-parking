@@ -73,6 +73,9 @@ class ClienteAbonado():
     def id_plaza(self, id_plaza):
         self.__id_plaza = id_plaza
 
+    def __str__(self):
+        return f"ClienteAbonado(nombre: {self.nombre}, apellidos: {self.apellidos}, dni: {self.dni}, email: {self.email})"
+
 
 
 
