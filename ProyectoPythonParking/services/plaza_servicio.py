@@ -22,5 +22,8 @@ class PlazaServicio():
     def findById(self, id):
         return self.repositorio.findById(id)
 
+    def findByCliente(self, cliente):
+        return self.repositorio.findByCliente(cliente)
+
 
 plaza_servicio = PlazaServicio(plaza_repositorio)

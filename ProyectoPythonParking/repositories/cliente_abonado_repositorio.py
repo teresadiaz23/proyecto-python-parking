@@ -23,6 +23,11 @@ class ClienteAbonadoRepositorio():
             if(cliente.dni == dni):
                 return cliente
 
+    def findByMatricula(self, matricula):
+        for cliente in self.lista_clientes:
+            if(cliente.matricula == matricula):
+                return cliente
+
 
 
 lista = [ClienteAbonado("1234", "Teresa", "Diaz", "123456", "teresa@email.com", None),

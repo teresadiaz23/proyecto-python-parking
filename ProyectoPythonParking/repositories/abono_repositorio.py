@@ -1,5 +1,5 @@
 class AbonoRepositorio():
-    def __init__(self, lista_abonos):
+    def __init__(self, lista_abonos=[]):
         self.__lista_abonos = lista_abonos
 
     @property
@@ -21,3 +21,6 @@ class AbonoRepositorio():
         for abono in self.lista_abonos:
             if(abono.pin == pin):
                 return abono
+
+
+abono_repositorio = AbonoRepositorio()

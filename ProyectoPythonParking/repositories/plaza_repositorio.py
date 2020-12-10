@@ -25,6 +25,10 @@ class PlazaRepositorio():
             if(plaza.id == id):
                 return plaza
 
+    def findByCliente(self, cliente):
+        for plaza in self.lista_plazas:
+            if(plaza.cliente == cliente):
+                return plaza
 
 plazas = []
 for p in range(60):

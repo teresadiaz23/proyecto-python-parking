@@ -1,3 +1,6 @@
+from repositories.abono_repositorio import abono_repositorio
+
+
 class AbonoServicio():
     def __init__(self, repo):
         self.__repo = repo
@@ -18,3 +21,6 @@ class AbonoServicio():
 
     def findByPin(self, pin):
         return self.repositorio.findByPin(pin)
+
+
+abono_servicio = AbonoServicio(abono_repositorio)
