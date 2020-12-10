@@ -47,3 +47,8 @@ class Plaza():
         self.__cliente = cliente
 
 
+    def __str__(self):
+        return f"Plaza(id: {self.id}, tipo_vehículo: {self.tipo_vehiculo}, tarifa: {self.tarifa}," \
+               f" ocupada: {self.ocupada}, cliente: {self.cliente})"
+
+

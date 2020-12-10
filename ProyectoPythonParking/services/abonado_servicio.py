@@ -1,6 +1,6 @@
 from repositories.cliente_abonado_repositorio import cliente_abonado_repositorio
 
-class ClienteAbonadoServicio():
+class AbonadoServicio():
     def __init__(self, repo):
         self.__repo = repo
 
@@ -22,4 +22,4 @@ class ClienteAbonadoServicio():
         return self.repositorio.findByDni(dni)
 
 
-cliente_abonado_servicio = ClienteAbonadoServicio(cliente_abonado_repositorio)
+abonado_servicio = AbonadoServicio(cliente_abonado_repositorio)

@@ -56,6 +56,10 @@ class Ticket():
         self.__coste = coste
 
 
+    def __str__(self):
+        return f"Ticket(matrícula: {self.matricula}, fecha_deposito: {self.fecha_salida}, id_plaza: {self.id_plaza}, " \
+               f"pin: {self.pin}, fecha_salida: {self.fecha_salida}, coste: {self.coste})"
+
 
 
 

@@ -1,3 +1,6 @@
+from repositories.plaza_repositorio import plaza_repositorio
+
+
 class PlazaServicio():
     def __init__(self, repo):
         self.__repo = repo
@@ -18,3 +21,6 @@ class PlazaServicio():
 
     def findById(self, id):
         return self.repositorio.findById(id)
+
+
+plaza_servicio = PlazaServicio(plaza_repositorio)

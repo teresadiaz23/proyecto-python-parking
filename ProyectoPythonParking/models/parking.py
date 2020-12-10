@@ -1,5 +1,8 @@
+from models.plaza import Plaza
+
+
 class Parking():
-    def __init__(self, lista_plazas, num_plazas, dinero_tickets, dinero_abonos):
+    def __init__(self, num_plazas, lista_plazas=[], dinero_tickets=[], dinero_abonos=[]):
         self.__lista_plazas = lista_plazas
         self.__num_plazas = num_plazas
         self.__dinero_tickets = dinero_tickets
@@ -36,3 +39,17 @@ class Parking():
     @dinero_abonos.setter
     def dinero_abonos(self, dinero_abonos):
         self.__dinero_abonos = dinero_abonos
+
+parking = Parking(60)
+# plazas = []
+# for p in range(parking.num_plazas):
+#     if(p < 42):
+#         plazas.append(Plaza(p+1, "turismo", 0.12))
+#     elif(p >= 42 and p < 51):
+#         plazas.append((Plaza(p+1, "motocicleta", 0.08)))
+#     else:
+#         plazas.append(Plaza(p+1, "movilidad reducida", 0.10))
+
+#parking.lista_plazas = plazas
+
+

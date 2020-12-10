@@ -1,3 +1,6 @@
+from repositories.ticket_repositorio import ticket_repositorio
+
+
 class TicketServicio():
     def __init__(self, repo):
         self.__repo = repo
@@ -18,3 +21,9 @@ class TicketServicio():
 
     def findByPin(self, pin):
         return self.repositorio.findByPin(pin)
+
+    def findByMatricula(self, matricula):
+        return self.repositorio.findByMatricula(matricula)
+
+
+ticket_servicio = TicketServicio(ticket_repositorio)

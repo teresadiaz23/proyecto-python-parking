@@ -1,5 +1,5 @@
 class TicketRepositorio():
-    def __init__(self, lista_tickets):
+    def __init__(self, lista_tickets=[]):
         self.__lista_tickets = lista_tickets
 
     @property
@@ -21,3 +21,11 @@ class TicketRepositorio():
         for ticket in self.lista_tickets:
             if(ticket.pin == pin):
                 return ticket
+
+    def findByMatricula(self, matricula):
+        for ticket in self.lista_tickets:
+            if(ticket.matricula == matricula):
+                return ticket
+
+
+ticket_repositorio = TicketRepositorio()
