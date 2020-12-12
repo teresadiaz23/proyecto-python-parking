@@ -25,5 +25,8 @@ class AbonoServicio():
     def findByCliente(self, cliente):
         return self.repositorio.findByCliente(cliente)
 
+    def delete(self, abono):
+        self.repositorio.delete(abono)
+
 
 abono_servicio = AbonoServicio(abono_repositorio)

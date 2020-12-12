@@ -1,4 +1,6 @@
 from random import randint
+from datetime import datetime, timedelta, date
+from dateutil.relativedelta import relativedelta
 
 from models.abono import Abono
 from models.cliente_abonado import ClienteAbonado
@@ -7,7 +9,7 @@ from services.abonado_servicio import abonado_servicio
 from services.abono_servicio import abono_servicio
 from services.parking_servicio import parking_servicio
 from services.ticket_servicio import ticket_servicio
-from datetime import datetime, timedelta, date
+
 
 
 class AdminServicio():
@@ -65,16 +67,16 @@ class AdminServicio():
         pin = randint(111111,999999)
         fecha = datetime.now()
         if(tipo_abono.lower() == "mensual"):
-            abono = Abono(pin, tipo_abono, datetime.now(), fecha + timedelta(days=30), cliente, 25)
+            abono = Abono(pin, tipo_abono, datetime.now(), fecha + relativedelta(months=1), cliente, 25)
 
         elif(tipo_abono.lower() == "trimestral"):
-            abono = Abono(pin, tipo_abono, datetime.now(), fecha + timedelta(days=90), cliente, 70)
+            abono = Abono(pin, tipo_abono, datetime.now(), fecha + relativedelta(months=3), cliente, 70)
 
         elif(tipo_abono.lower() == "semestral"):
-            abono = Abono(pin, tipo_abono, datetime.now(), fecha + timedelta(days=180), cliente, 130)
+            abono = Abono(pin, tipo_abono, datetime.now(), fecha + relativedelta(months=6), cliente, 130)
 
         elif(tipo_abono.lower() == "anual"):
-            abono = Abono(pin, tipo_abono, datetime.now(), fecha + timedelta(days=365), cliente, 200)
+            abono = Abono(pin, tipo_abono, datetime.now(), fecha + relativedelta(years=1), cliente, 200)
 
         else:
             confirmado = False
@@ -86,6 +88,101 @@ class AdminServicio():
             parking_servicio.findAll().dinero_abonos.append(abono.precio)
 
         return confirmado
+
+    def renovacion_abono(self, dni, pin, tipo_abono):
+        modificado = False
+        cliente = abonado_servicio.findByDni(dni)
+        abono = abono_servicio.findByCliente(cliente)
+        abono2 = abono_servicio.findByPin(pin)
+
+        if(abono == abono2 and abono != None):
+            if(tipo_abono.lowe() == "mensual"):
+                abono.fecha_cancelacion = abono.fecha_cancelacion + relativedelta(months=1)
+                abono.tipo = tipo_abono
+                cliente.abono = tipo_abono
+                abono.precio = 25
+                modificado = True
+
+            elif(tipo_abono.lowe() == "trimestral"):
+                abono.fecha_cancelacion = abono.fecha_cancelacion + relativedelta(months=3)
+                abono.tipo = tipo_abono
+                cliente.abono = tipo_abono
+                abono.precio = 70
+                modificado = True
+
+            elif(tipo_abono.lowe() == "semestral"):
+                abono.fecha_cancelacion = abono.fecha_cancelacion + relativedelta(months=6)
+                abono.tipo = tipo_abono
+                cliente.abono = tipo_abono
+                abono.precio = 130
+                modificado = True
+
+            elif(tipo_abono.lowe() == "anual"):
+                abono.fecha_cancelacion = abono.fecha_cancelacion + relativedelta(years=1)
+                abono.tipo = tipo_abono
+                cliente.abono = tipo_abono
+                abono.precio = 200
+                modificado = True
+
+        parking_servicio.findAll().dinero_abonos.append(abono.precio)
+        return modificado
+
+    def modificar_datos_abono(self, dni, pin, nombre, apellidos, num_tarjeta, email):
+        modificado = False
+        cliente = abonado_servicio.findByDni(dni)
+        abono = abono_servicio.findByCliente(cliente)
+        abono2 = abono_servicio.findByPin(pin)
+
+        if(abono == abono2 and abono != None):
+            if(nombre != ""):
+                cliente.nombre = nombre
+                modificado = True
+            if(apellidos != ""):
+                cliente.apellidos = apellidos
+                modificado = True
+            if(num_tarjeta != ""):
+                cliente.num_tarjeta = num_tarjeta
+                modificado = True
+            if(email != ""):
+                cliente.email = email
+                modificado = True
+
+            if(modificado):
+                abono.cliente_abonado = cliente
+
+            return modificado
+
+    def borrar_abono(self, dni, pin):
+        cliente = abonado_servicio.findByDni(dni)
+        abono = abono_servicio.findByCliente(cliente)
+        abono2 = abono_servicio.findByPin(pin)
+        borrado = False
+
+        if(abono == abono2 and abono != None):
+            abono_servicio.delete(abono)
+            for plaza in parking_servicio.findAll().lista_plazas:
+                if(plaza.cliente == cliente):
+                    plaza.cliente = None
+
+            borrado = True
+
+        return borrado
+
+    def caducidad_abonos_mes(self, mes):
+        abonos = []
+        for abono in abono_servicio.findAll():
+            if(abono.fecha_cancelacion == int(mes)):
+                abonos.append(abono)
+
+        return abonos
+
+    def caducidad_abonos_10_dias(self):
+        abonos = []
+        for abono in abono_servicio.findAll():
+            if(abono.fecha_cancelacion >= datetime.now() and abono.fecha_cancelacion <= (datetime.now() + relativedelta(days=10))):
+                abonos.append(abono)
+        
+        return abonos
 
 
 
