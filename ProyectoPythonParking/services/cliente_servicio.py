@@ -1,3 +1,4 @@
+from models.DatosErroneos import DatosErroneos
 from models.plaza import Plaza
 from models.ticket import Ticket
 from services.plaza_servicio import plaza_servicio
@@ -12,7 +13,7 @@ class ClienteServicio():
 
     def depositar_vehiculo(self, matricula, tipo):
         depositado = False
-        #plaza_asignada = Plaza()
+
 
         if(tipo.lower() == "turismo"):
             if(len(parking_servicio.plazas_libres_turismo()) > 0):
@@ -38,6 +39,8 @@ class ClienteServicio():
             ticket = Ticket(matricula, datetime.now, plaza_asignada.id, pin)
             ticket_servicio.save(ticket)
 
+        else:
+            raise DatosErroneos
 
         return depositado
 
@@ -58,6 +61,9 @@ class ClienteServicio():
             parking_servicio.findAll().dinero_tickets.append(total)
 
             plaza.ocupada = False
+
+        if(total == -1):
+            raise DatosErroneos
 
         return total
 
