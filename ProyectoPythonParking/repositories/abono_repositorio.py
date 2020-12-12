@@ -27,5 +27,10 @@ class AbonoRepositorio():
             if(abono.cliente == cliente):
                 return abono
 
+    def delete(self, abono):
+        for a in self.lista_abonos:
+            if(a == abono):
+                self.lista_abonos.remove(a)
+
 
 abono_repositorio = AbonoRepositorio()
