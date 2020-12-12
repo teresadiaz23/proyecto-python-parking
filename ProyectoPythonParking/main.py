@@ -13,6 +13,7 @@ fecha = date(2020,12,12)
 print(fecha + timedelta(days=30))
 print(fecha.month)
 print(fecha + relativedelta(months=1))
+print(datetime.now() + relativedelta(months=1))
 fecha2 = datetime.now()
 tiempo = fecha2 -fecha1
 

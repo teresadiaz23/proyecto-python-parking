@@ -37,7 +37,7 @@ class AbonadoServicio():
 
         if(cliente == cliente2 and cliente != None):
             depositado = True
-            plaza = parking_servicio.findAll().lista_plazas.findByCliente(cliente)
+            plaza = parking_servicio.findPlazaByCliente(cliente)
             plaza.ocupada = True
 
         return depositado
@@ -45,7 +45,7 @@ class AbonadoServicio():
     def retirar_abonados(self, matricula, id, pin):
         retirado = False
         cliente = self.repositorio.findByMatricula(matricula)
-        plaza = parking_servicio.findAll().lista_plazas.findById(id)
+        plaza = parking_servicio.findPlazaById(id)
         abono = abono_servicio.findByPin(pin)
 
         if(cliente != None and abono != None):
@@ -64,6 +64,30 @@ class AbonadoServicio():
         if(abono == abono2):
             return abono
 
+    def obtener_datos_personales(self, dni, pin):
+        cliente = self.repositorio.findByDni(dni)
+        abono = abono_servicio.findByPin(pin)
+        abono2 = abono_servicio.findByCliente(cliente)
+
+        if(abono == abono2):
+            return cliente
+
+# obtenerDatosPersonales(dni, pin){
+#         let cliente = abonadoRepositorio.listaAbonados.find(cliente => cliente.dni === dni);
+#         let abono = abonoServicio.findAll().find(abono => abono.clienteAbonado == cliente);
+#         let abono2 = abonoServicio.findAll().find(abono => abono.pin == pin);
+#
+#
+#         return cliente;
+#
+#
+#
+#     }
 
 
 abonado_servicio = AbonadoServicio(cliente_abonado_repositorio)
+
+# print(abonado_servicio.depositar_abonados("1234BBB", "1234"))
+# print(abonado_servicio.retirar_abonados("1234BBB", 3, 111))
+# print(abonado_servicio.obtener_abono("1234", 111))
+# print(abonado_servicio.obtener_datos_personales("1234", 111))

@@ -1,4 +1,6 @@
 from models.plaza import Plaza
+from repositories.cliente_abonado_repositorio import cliente_abonado_repositorio
+#from services.abonado_servicio import abonado_servicio
 
 
 class PlazaRepositorio():
@@ -39,5 +41,12 @@ for p in range(60):
     else:
         plazas.append(Plaza(p+1, "movilidad reducida", 0.10))
 
+plazas[2].cliente = cliente_abonado_repositorio.findAll()[0]
+plazas[44].cliente = cliente_abonado_repositorio.findAll()[1]
+plazas[51].cliente = cliente_abonado_repositorio.findAll()[2]
+plazas[29].cliente = cliente_abonado_repositorio.findAll()[3]
 
 plaza_repositorio = PlazaRepositorio(plazas)
+
+# for plaza in plaza_repositorio.findAll():
+#     print(plaza)

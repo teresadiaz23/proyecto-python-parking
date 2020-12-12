@@ -18,6 +18,12 @@ class ParkingServicio():
     def findAll(self):
         return self.repositorio.findAll()
 
+    def findPlazaByCliente(self, cliente):
+        return self.repositorio.findPlazaByCliente(cliente)
+
+    def findPlazaById(self, id):
+        return self.repositorio.findPlazaById(id)
+
     def plazas_libres_turismo(self):
         libres = []
         for plaza in self.repositorio.parking.lista_plazas:

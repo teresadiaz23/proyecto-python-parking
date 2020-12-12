@@ -37,7 +37,7 @@ class AdminServicio():
         total = 0
         if(len(parking_servicio.findAll().dinero_abonos) > 0):
             for d in parking_servicio.findAll().dinero_abonos:
-                total+= d
+                total += d
 
         return round(total, 2)
 
@@ -96,28 +96,28 @@ class AdminServicio():
         abono2 = abono_servicio.findByPin(pin)
 
         if(abono == abono2 and abono != None):
-            if(tipo_abono.lowe() == "mensual"):
+            if(tipo_abono.lower() == "mensual"):
                 abono.fecha_cancelacion = abono.fecha_cancelacion + relativedelta(months=1)
                 abono.tipo = tipo_abono
                 cliente.abono = tipo_abono
                 abono.precio = 25
                 modificado = True
 
-            elif(tipo_abono.lowe() == "trimestral"):
+            elif(tipo_abono.lower() == "trimestral"):
                 abono.fecha_cancelacion = abono.fecha_cancelacion + relativedelta(months=3)
                 abono.tipo = tipo_abono
                 cliente.abono = tipo_abono
                 abono.precio = 70
                 modificado = True
 
-            elif(tipo_abono.lowe() == "semestral"):
+            elif(tipo_abono.lower() == "semestral"):
                 abono.fecha_cancelacion = abono.fecha_cancelacion + relativedelta(months=6)
                 abono.tipo = tipo_abono
                 cliente.abono = tipo_abono
                 abono.precio = 130
                 modificado = True
 
-            elif(tipo_abono.lowe() == "anual"):
+            elif(tipo_abono.lower() == "anual"):
                 abono.fecha_cancelacion = abono.fecha_cancelacion + relativedelta(years=1)
                 abono.tipo = tipo_abono
                 cliente.abono = tipo_abono
@@ -171,7 +171,7 @@ class AdminServicio():
     def caducidad_abonos_mes(self, mes):
         abonos = []
         for abono in abono_servicio.findAll():
-            if(abono.fecha_cancelacion == int(mes)):
+            if(abono.fecha_cancelacion.month == int(mes)):
                 abonos.append(abono)
 
         return abonos
@@ -185,4 +185,16 @@ class AdminServicio():
         return abonos
 
 
+
+admin_servicio = AdminServicio()
+print(admin_servicio.comprobar_password("1234"))
+print(admin_servicio.facturacion(datetime(2020, 10, 10), datetime(2020, 12, 10)))
+print(admin_servicio.consulta_cobro_abonados())
+print(admin_servicio.alta_abono("1235", "Teresa", "Diaz", "14141241", "teresa@email.com", "1234FFF", "turismo", "mensual"))
+#print(admin_servicio.renovacion_abono("1234", 111, "anual"))
+#print(admin_servicio.borrar_abono("1234", 111))
+print(admin_servicio.caducidad_abonos_mes("12"))
+print(admin_servicio.caducidad_abonos_10_dias())
+for abono in abono_servicio.findAll():
+    print(abono)
 

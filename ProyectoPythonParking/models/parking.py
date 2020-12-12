@@ -1,4 +1,6 @@
 from models.plaza import Plaza
+from services.abono_servicio import abono_servicio
+from services.ticket_servicio import ticket_servicio
 
 
 class Parking():
@@ -40,16 +42,22 @@ class Parking():
     def dinero_abonos(self, dinero_abonos):
         self.__dinero_abonos = dinero_abonos
 
-parking = Parking(60)
-# plazas = []
-# for p in range(parking.num_plazas):
-#     if(p < 42):
-#         plazas.append(Plaza(p+1, "turismo", 0.12))
-#     elif(p >= 42 and p < 51):
-#         plazas.append((Plaza(p+1, "motocicleta", 0.08)))
-#     else:
-#         plazas.append(Plaza(p+1, "movilidad reducida", 0.10))
 
-#parking.lista_plazas = plazas
+dinero_tickets = []
+if(len(ticket_servicio.findAll()) > 0):
+    for ticket in ticket_servicio.findAll():
+        dinero_tickets.append(ticket.coste)
+
+
+dinero_abonos = []
+if(len(abono_servicio.findAll()) > 0):
+    for abono in abono_servicio.findAll():
+        dinero_abonos.append(abono.precio)
+
+
+parking = Parking(60,  dinero_tickets=dinero_tickets, dinero_abonos=dinero_abonos)
+
+
+
 
 

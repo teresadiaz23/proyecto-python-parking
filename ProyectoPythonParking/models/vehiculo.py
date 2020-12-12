@@ -13,7 +13,7 @@ class Vehiculo():
 
 
 class Turismo(Vehiculo):
-    def __init__(self, matricula, tarifa):
+    def __init__(self, matricula, tarifa=0.12):
         super().__init__(matricula)
         self.__tarifa = tarifa
 
@@ -27,7 +27,7 @@ class Turismo(Vehiculo):
 
 
 class Motocicleta(Vehiculo):
-    def __init__(self, matricula, tarifa):
+    def __init__(self, matricula, tarifa=0.08):
         super().__init__(matricula)
         self.__tarifa = tarifa
 
@@ -41,7 +41,7 @@ class Motocicleta(Vehiculo):
 
 
 class MovilidadReducida(Vehiculo):
-    def __init__(self, matricula, tarifa):
+    def __init__(self, matricula, tarifa=0.10):
         super().__init__(matricula)
         self.__tarifa = tarifa
 

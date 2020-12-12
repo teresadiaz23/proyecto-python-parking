@@ -1,4 +1,7 @@
 from models.cliente_abonado import ClienteAbonado
+from models.vehiculo import Turismo, Motocicleta, MovilidadReducida
+
+
 class ClienteAbonadoRepositorio():
     def __init__(self, lista_clientes):
         self.__lista_clientes = lista_clientes
@@ -25,17 +28,22 @@ class ClienteAbonadoRepositorio():
 
     def findByMatricula(self, matricula):
         for cliente in self.lista_clientes:
-            if(cliente.matricula == matricula):
+            if(cliente.vehiculo.matricula == matricula):
                 return cliente
 
 
 
-lista = [ClienteAbonado("1234", "Teresa", "Diaz", "123456", "teresa@email.com", None),
-         ClienteAbonado("4321", "Pepe", "García", "123456", "pepe@email.com", None)]
+lista = [
+    ClienteAbonado("1234", "Luismi", "López", "123456", "luismi@email.com", Turismo("1234BBB"), "mensual", 3),
+    ClienteAbonado("12345678B", "Pepe", "García", "567897", "pepe@email.com", Motocicleta("6543HHH"), "trimestral", 45),
+    ClienteAbonado("12345678C", "María", "Pérez", "342565", "maria@email.com", MovilidadReducida("3846DDD"), "semestral", 52),
+    ClienteAbonado("12345678D", "Miguel", "Campos", "287698", "miguel@email.com", Turismo("3876KKK"), "anual", 30)
+]
 
 cliente_abonado_repositorio = ClienteAbonadoRepositorio(lista)
 
 
-for c in cliente_abonado_repositorio.findAll():
-    print(c)
-print(cliente_abonado_repositorio.findByDni("1234"))
+# for c in cliente_abonado_repositorio.findAll():
+#     print(c)
+#print(cliente_abonado_repositorio.findByDni("1234"))
+
