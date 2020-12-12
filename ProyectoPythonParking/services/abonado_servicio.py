@@ -56,5 +56,14 @@ class AbonadoServicio():
         return retirado
 
 
+    def obtener_abono(self, dni, pin):
+        cliente = self.repositorio.findByDni(dni)
+        abono = abono_servicio.findByPin(pin)
+        abono2 = abono_servicio.findByCliente(cliente)
+
+        if(abono == abono2):
+            return abono
+
+
 
 abonado_servicio = AbonadoServicio(cliente_abonado_repositorio)

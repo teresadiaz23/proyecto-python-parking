@@ -22,5 +22,8 @@ class AbonoServicio():
     def findByPin(self, pin):
         return self.repositorio.findByPin(pin)
 
+    def findByCliente(self, cliente):
+        return self.repositorio.findByCliente(cliente)
+
 
 abono_servicio = AbonoServicio(abono_repositorio)

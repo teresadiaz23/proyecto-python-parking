@@ -22,5 +22,10 @@ class AbonoRepositorio():
             if(abono.pin == pin):
                 return abono
 
+    def findByCliente(self, cliente):
+        for abono in self.lista_abonos:
+            if(abono.cliente == cliente):
+                return abono
+
 
 abono_repositorio = AbonoRepositorio()
