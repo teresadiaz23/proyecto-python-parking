@@ -27,7 +27,7 @@ class ClienteController():
        try:
            total = cliente_servicio.retirar_vehiculo(matricula, id, pin)
            if(total >= 0):
-               print(f"\n Importe a pagar: {total}€")
+               print(f"\nImporte a pagar: {total}€")
                print("Puede retirar su vehículo")
 
        except DatosErroneos:

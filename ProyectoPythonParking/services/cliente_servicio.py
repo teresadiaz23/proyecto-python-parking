@@ -52,7 +52,7 @@ class ClienteServicio():
 
         if(ticket != None and ticket == ticket2 and plaza != None):
             hoy = datetime.now()
-            tiempo = hoy - ticket.fecha_deposito()
+            tiempo = hoy - ticket.fecha_deposito
             tiempo = floor(tiempo.total_seconds()/60)
 
             total = tiempo * plaza.tarifa
@@ -71,7 +71,7 @@ class ClienteServicio():
 cliente_servicio = ClienteServicio()
 # cliente_servicio.depositar_vehiculo("1234", "turismo")
 # print(parking_servicio.findAll().lista_plazas[0])
-# print(cliente_servicio.retirar_vehiculo("1234", 1, 111))
+# print(cliente_servicio.retirar_vehiculo("1234BBB", 6, 111111))
 # print(parking_servicio.findAll().lista_plazas[0])
 # cliente_servicio.depositar_vehiculo("1234", "motocicleta")
 # cliente_servicio.depositar_vehiculo("1234", "movilidad reducida")

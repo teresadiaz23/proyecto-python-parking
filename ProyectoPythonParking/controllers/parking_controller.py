@@ -75,17 +75,24 @@ class ParkingController():
         meses = {1: "Enero", 2: "Febrero", 3: "Marzo", 4: "Abril", 5: "Mayo", 6: "Junio", 7: "Julio",
                  8: "Agosto", 9: "Septiembre", 10: "Octubre", 11: "Noviembre", 12: "Diciembre"}
 
-        try:
-            if(mes in meses.values()):
 
-                for k, v in meses.items():
-                    if(k == mes):
-                        return v
-            else:
-                raise MesIncorrecto
+        for k, v in meses.items():
+            if(k == mes):
+                return v
+        if(mes not in meses.values()):
+            raise MesIncorrecto
 
-        except MesIncorrecto:
-            print("\nEse mes no existe")
+
+        # try:
+        #
+        #     for k, v in meses.items():
+        #         if(k == mes):
+        #             return v
+        #     if(mes not in meses.values()):
+        #         raise MesIncorrecto
+        #
+        # except MesIncorrecto:
+        #     print("\nEse mes no existe")
 
 parking_controller = ParkingController()
 #parking_controller.imprimir_ticket(ticket_servicio.findByPin(111111))

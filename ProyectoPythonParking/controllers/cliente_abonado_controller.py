@@ -21,7 +21,7 @@ class ClienteAbonadoController():
     def depositar_abonados(self, matricula, dni):
         try:
             if(abonado_servicio.depositar_abonados(matricula, dni)):
-                print("\n Puede aparcar su vehículo")
+                print("\nPuede aparcar su vehículo")
 
 
         except ClienteNoEncontrado:

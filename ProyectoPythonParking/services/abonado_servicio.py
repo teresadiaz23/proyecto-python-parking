@@ -56,7 +56,7 @@ class AbonadoServicio():
                 plaza.ocupada = False
                 retirado = True
 
-        if(not retirado):
+        else:
             raise ClienteNoEncontrado
 
         return retirado
