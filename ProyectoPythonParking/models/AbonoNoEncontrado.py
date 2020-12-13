@@ -1,0 +1,2 @@
+class AbonoNoEncontrado(Exception):
+    pass

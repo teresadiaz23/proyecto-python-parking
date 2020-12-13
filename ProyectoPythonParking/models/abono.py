@@ -54,3 +54,8 @@ class Abono():
     @precio.setter
     def precio(self, precio):
         self.__precio = precio
+
+    def __str__(self):
+        return f"Abono(pin: {self.pin}, tipo: {self.tipo}, fecha_activacion: {self.fecha_activacion}," \
+               f" fecha_cancelacion: {self.fecha_cancelacion}," \
+               f" cliente_abonado: {self.cliente_abonado}, precio: {self.precio})"

@@ -1,5 +1,5 @@
 class Plaza():
-    def __init__(self, id, tipo_vehiculo, tarifa, ocupada = False, cliente = None):
+    def __init__(self, id, tipo_vehiculo, tarifa, ocupada=False, cliente=None):
         self.__id = id
         self.__tipo_vehiculo = tipo_vehiculo
         self.__tarifa = tarifa
@@ -45,5 +45,10 @@ class Plaza():
     @cliente.setter
     def cliente(self, cliente):
         self.__cliente = cliente
+
+
+    def __str__(self):
+        return f"Plaza(id: {self.id}, tipo_vehículo: {self.tipo_vehiculo}, tarifa: {self.tarifa}," \
+               f" ocupada: {self.ocupada}, cliente: {self.cliente})"
 
 

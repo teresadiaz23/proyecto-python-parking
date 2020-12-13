@@ -1,5 +1,10 @@
+from models.plaza import Plaza
+from services.abono_servicio import abono_servicio
+from services.ticket_servicio import ticket_servicio
+
+
 class Parking():
-    def __init__(self, lista_plazas, num_plazas, dinero_tickets, dinero_abonos):
+    def __init__(self, num_plazas, lista_plazas=[], dinero_tickets=[], dinero_abonos=[]):
         self.__lista_plazas = lista_plazas
         self.__num_plazas = num_plazas
         self.__dinero_tickets = dinero_tickets
@@ -36,3 +41,23 @@ class Parking():
     @dinero_abonos.setter
     def dinero_abonos(self, dinero_abonos):
         self.__dinero_abonos = dinero_abonos
+
+
+dinero_tickets = []
+if(len(ticket_servicio.findAll()) > 0):
+    for ticket in ticket_servicio.findAll():
+        dinero_tickets.append(ticket.coste)
+
+
+dinero_abonos = []
+if(len(abono_servicio.findAll()) > 0):
+    for abono in abono_servicio.findAll():
+        dinero_abonos.append(abono.precio)
+
+
+parking = Parking(60,  dinero_tickets=dinero_tickets, dinero_abonos=dinero_abonos)
+
+
+
+
+
