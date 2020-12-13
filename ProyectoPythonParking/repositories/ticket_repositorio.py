@@ -1,3 +1,8 @@
+from datetime import datetime
+
+from models.ticket import Ticket
+
+
 class TicketRepositorio():
     def __init__(self, lista_tickets=[]):
         self.__lista_tickets = lista_tickets
@@ -28,4 +33,5 @@ class TicketRepositorio():
                 return ticket
 
 
-ticket_repositorio = TicketRepositorio()
+lista_tickets = [Ticket("1234BBB", datetime(2020,12,10,15,30), 6, 111111, datetime(2020,12,10,17,30), 5)]
+ticket_repositorio = TicketRepositorio(lista_tickets)

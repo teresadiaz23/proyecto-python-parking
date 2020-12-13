@@ -1,0 +1,2 @@
+class MesIncorrecto(Exception):
+    pass

@@ -1,3 +1,5 @@
+from models.AbonoNoEncontrado import AbonoNoEncontrado
+from models.ClienteNoEncontrado import ClienteNoEncontrado
 from repositories.cliente_abonado_repositorio import cliente_abonado_repositorio
 from services.abono_servicio import abono_servicio
 from services.parking_servicio import parking_servicio
@@ -29,7 +31,6 @@ class AbonadoServicio():
         return self.repositorio.findByMatricula(matricula)
 
 
-
     def depositar_abonados(self, matricula, dni):
         depositado = False
         cliente = self.repositorio.findByDni(dni)
@@ -39,6 +40,8 @@ class AbonadoServicio():
             depositado = True
             plaza = parking_servicio.findPlazaByCliente(cliente)
             plaza.ocupada = True
+        if(not depositado):
+            raise ClienteNoEncontrado
 
         return depositado
 
@@ -53,6 +56,9 @@ class AbonadoServicio():
                 plaza.ocupada = False
                 retirado = True
 
+        if(not retirado):
+            raise ClienteNoEncontrado
+
         return retirado
 
 
@@ -64,6 +70,9 @@ class AbonadoServicio():
         if(abono == abono2):
             return abono
 
+        else:
+            raise AbonoNoEncontrado
+
     def obtener_datos_personales(self, dni, pin):
         cliente = self.repositorio.findByDni(dni)
         abono = abono_servicio.findByPin(pin)
@@ -71,18 +80,8 @@ class AbonadoServicio():
 
         if(abono == abono2):
             return cliente
-
-# obtenerDatosPersonales(dni, pin){
-#         let cliente = abonadoRepositorio.listaAbonados.find(cliente => cliente.dni === dni);
-#         let abono = abonoServicio.findAll().find(abono => abono.clienteAbonado == cliente);
-#         let abono2 = abonoServicio.findAll().find(abono => abono.pin == pin);
-#
-#
-#         return cliente;
-#
-#
-#
-#     }
+        else:
+            raise ClienteNoEncontrado
 
 
 abonado_servicio = AbonadoServicio(cliente_abonado_repositorio)

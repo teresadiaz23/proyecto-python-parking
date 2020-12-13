@@ -2,6 +2,8 @@ from random import randint
 from datetime import datetime, timedelta, date
 from dateutil.relativedelta import relativedelta
 
+from models.AbonoNoEncontrado import AbonoNoEncontrado
+from models.DatosErroneos import DatosErroneos
 from models.abono import Abono
 from models.cliente_abonado import ClienteAbonado
 from models.vehiculo import Turismo, Motocicleta, MovilidadReducida
@@ -62,9 +64,9 @@ class AdminServicio():
         if(plaza != None):
             id = plaza.id
 
-        #pip install python-dateutil relativedelta
+
         cliente = ClienteAbonado(dni, nombre, apellidos, num_tarjeta, email, vehiculo, tipo_abono, id)
-        pin = randint(111111,999999)
+        pin = randint(111111, 999999)
         fecha = datetime.now()
         if(tipo_abono.lower() == "mensual"):
             abono = Abono(pin, tipo_abono, datetime.now(), fecha + relativedelta(months=1), cliente, 25)
@@ -86,6 +88,9 @@ class AdminServicio():
             abono_servicio.save(abono)
             plaza.cliente = cliente
             parking_servicio.findAll().dinero_abonos.append(abono.precio)
+
+        else:
+            raise DatosErroneos
 
         return confirmado
 
@@ -123,6 +128,11 @@ class AdminServicio():
                 cliente.abono = tipo_abono
                 abono.precio = 200
                 modificado = True
+        else:
+            raise AbonoNoEncontrado
+
+        if(not modificado):
+            raise DatosErroneos
 
         parking_servicio.findAll().dinero_abonos.append(abono.precio)
         return modificado
@@ -149,8 +159,12 @@ class AdminServicio():
 
             if(modificado):
                 abono.cliente_abonado = cliente
+            else:
+                raise DatosErroneos
+        else:
+            raise AbonoNoEncontrado
 
-            return modificado
+        return modificado
 
     def borrar_abono(self, dni, pin):
         cliente = abonado_servicio.findByDni(dni)
@@ -165,6 +179,8 @@ class AdminServicio():
                     plaza.cliente = None
 
             borrado = True
+        else:
+            raise AbonoNoEncontrado
 
         return borrado
 
@@ -187,14 +203,14 @@ class AdminServicio():
 
 
 admin_servicio = AdminServicio()
-print(admin_servicio.comprobar_password("1234"))
-print(admin_servicio.facturacion(datetime(2020, 10, 10), datetime(2020, 12, 10)))
-print(admin_servicio.consulta_cobro_abonados())
-print(admin_servicio.alta_abono("1235", "Teresa", "Diaz", "14141241", "teresa@email.com", "1234FFF", "turismo", "mensual"))
-#print(admin_servicio.renovacion_abono("1234", 111, "anual"))
-#print(admin_servicio.borrar_abono("1234", 111))
-print(admin_servicio.caducidad_abonos_mes("12"))
-print(admin_servicio.caducidad_abonos_10_dias())
-for abono in abono_servicio.findAll():
-    print(abono)
+# print(admin_servicio.comprobar_password("1234"))
+# print(admin_servicio.facturacion(datetime(2020, 10, 10), datetime(2020, 12, 10)))
+# print(admin_servicio.consulta_cobro_abonados())
+# print(admin_servicio.alta_abono("1235", "Teresa", "Diaz", "14141241", "teresa@email.com", "1234FFF", "turismo", "mensual"))
+# print(admin_servicio.renovacion_abono("1234", 111, "anual"))
+# print(admin_servicio.borrar_abono("1234", 111))
+# print(admin_servicio.caducidad_abonos_mes("12"))
+# print(admin_servicio.caducidad_abonos_10_dias())
+# for abono in abono_servicio.findAll():
+#     print(abono)
 
