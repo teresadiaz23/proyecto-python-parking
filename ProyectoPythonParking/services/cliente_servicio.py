@@ -36,7 +36,7 @@ class ClienteServicio():
         if(depositado):
             pin = randint(111111,999999)
 
-            ticket = Ticket(matricula, datetime.now, plaza_asignada.id, pin)
+            ticket = Ticket(matricula, datetime.now(), plaza_asignada.id, pin)
             ticket_servicio.save(ticket)
 
         else:

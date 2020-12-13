@@ -1,10 +1,12 @@
+from controllers.parking_controller import parking_controller
 from models.DatosErroneos import DatosErroneos
 from services.cliente_servicio import cliente_servicio
+from services.ticket_servicio import ticket_servicio
 
 
 class ClienteController():
    def menu_cliente(self):
-       return "Pulse 1 para depositar un vehículo\n" \
+       return "\nPulse 1 para depositar un vehículo\n" \
               "Pulse 2 para retirar un vehículo\n" \
               "Pulse 3 para obtener un abono\n" \
               "Pulse 0 para salir"
@@ -14,10 +16,8 @@ class ClienteController():
 
            if(cliente_servicio.depositar_vehiculo(matricula, tipo)):
                print("\nPuede aparcar su vehículo en la plaza asignada")
-               #imprimir ticket
+               parking_controller.imprimir_ticket(ticket_servicio.findAll()[len(ticket_servicio.findAll()) - 1])
 
-           # else:
-           #     raise DatosErroneos
 
        except DatosErroneos:
            print("\nLos datos introducidos no son correctos")
@@ -29,9 +29,6 @@ class ClienteController():
            if(total >= 0):
                print(f"\n Importe a pagar: {total}€")
                print("Puede retirar su vehículo")
-
-           # else:
-           #     raise DatosErroneos
 
        except DatosErroneos:
             print("\nLos datos introducidos no son correctos")

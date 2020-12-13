@@ -81,7 +81,7 @@ class AbonadoServicio():
         if(abono == abono2):
             return cliente
         else:
-            raise AbonoNoEncontrado
+            raise ClienteNoEncontrado
 
 
 abonado_servicio = AbonadoServicio(cliente_abonado_repositorio)
