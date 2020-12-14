@@ -102,43 +102,46 @@ while continuar:
                 print("\nEsa opción no está disponible")
 
     elif(op == "3"):
-        while continuar4:
-            op = input(admin_controller.menu_admin() + "\n")
-            if(op == "1"):
-                admin_controller.estado_parking()
+        password = input("Introduce la contraseña: ")
+        if(admin_controller.comprobar_password(password)):
+            while continuar4:
+                op = input(admin_controller.menu_admin() + "\n")
+                if(op == "1"):
+                    admin_controller.estado_parking()
 
-            elif(op == "2"):
-                fecha1 = input("Introduce la primera fecha y hora con el formato 'aaaa,mm,dd,hh,mm': ")
-                lista1 = fecha1.split(",")
-                fecha2 = input("Introduce la segunda fecha y hora con el formato 'aaaa,mm,dd,hh,mm': ")
-                lista2 = fecha1.split(",")
+                elif(op == "2"):
+                    fecha1 = input("Introduce la primera fecha y hora con el formato 'aaaa,mm,dd,hh,mm': ")
+                    lista1 = fecha1.split(",")
+                    fecha2 = input("Introduce la segunda fecha y hora con el formato 'aaaa,mm,dd,hh,mm': ")
+                    lista2 = fecha1.split(",")
 
-                admin_controller.facturacion(datetime(int(lista1[0]), int(lista1[1]), int(lista1[2]), int(lista1[3]), int(lista1[4]))
-                                             , datetime(int(lista2[0]), int(lista2[1]), int(lista2[2]), int(lista2[3]), int(lista2[4])))
+                    admin_controller.facturacion(datetime(int(lista1[0]), int(lista1[1]), int(lista1[2]), int(lista1[3]), int(lista1[4]))
+                                                 , datetime(int(lista2[0]), int(lista2[1]), int(lista2[2]), int(lista2[3]), int(lista2[4])))
 
 
-            elif(op == "3"):
-                admin_controller.consulta_abonados()
+                elif(op == "3"):
+                    admin_controller.consulta_abonados()
 
-            elif(op == "4"):
+                elif(op == "4"):
 
-                try:
-                    mes = int(input("Introduce un mes en número: "))
-                    print(f"\nAbonos que caducan en {parking_controller.imprimir_mes(mes)}")
-                    admin_controller.caducidad_abonos_mes(mes)
-                except MesIncorrecto:
-                     print("\nEse mes no existe")
+                    try:
+                        mes = int(input("Introduce un mes en número: "))
+                        print(f"\nAbonos que caducan en {parking_controller.imprimir_mes(mes)}")
+                        admin_controller.caducidad_abonos_mes(mes)
+                    except MesIncorrecto:
+                         print("\nEse mes no existe")
 
-            elif(op == "5"):
-                admin_controller.caducidad_abonos_proximos_10_dias()
+                elif(op == "5"):
+                    admin_controller.caducidad_abonos_proximos_10_dias()
 
-            elif(op == "0"):
-                print("Saliendo al menú principal")
-                continuar4 = False
+                elif(op == "0"):
+                    print("Saliendo al menú principal")
+                    continuar4 = False
 
-            else:
-                print("\nEsa opción no está disponible")
-
+                else:
+                    print("\nEsa opción no está disponible")
+        else:
+            print("\nContraseña incorrecta")
 
     elif(op == "0"):
         print("Saliendo...")
