@@ -113,7 +113,7 @@ while continuar:
                     fecha1 = input("Introduce la primera fecha y hora con el formato 'aaaa,mm,dd,hh,mm': ")
                     lista1 = fecha1.split(",")
                     fecha2 = input("Introduce la segunda fecha y hora con el formato 'aaaa,mm,dd,hh,mm': ")
-                    lista2 = fecha1.split(",")
+                    lista2 = fecha2.split(",")
 
                     admin_controller.facturacion(datetime(int(lista1[0]), int(lista1[1]), int(lista1[2]), int(lista1[3]), int(lista1[4]))
                                                  , datetime(int(lista2[0]), int(lista2[1]), int(lista2[2]), int(lista2[3]), int(lista2[4])))
