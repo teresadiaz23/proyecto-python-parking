@@ -38,7 +38,11 @@ class TicketRepositorio():
                 return ticket
 
 
-lista_tickets = [Ticket("1234BBB", datetime(2020, 12, 10, 15, 30), 6, 111111, datetime(2020, 12, 12, 17, 30), 5)]
+lista_tickets = [
+    Ticket("1234BBB", datetime(2020, 12, 10, 15, 30), 6, 111111, datetime(2020, 12, 10, 17, 30), 5),
+    Ticket("1234JJJ", datetime(2020, 12, 12, 15, 30), 6, 111111, datetime(2020, 12, 12, 17, 30), 5.50),
+    Ticket("1234FFF", datetime(2020, 12, 14, 15, 30), 6, 111111, datetime(2020, 12, 14, 17, 30), 6)
+]
 
 filename = './datos/tickets'
 outfile = open(filename, 'wb')

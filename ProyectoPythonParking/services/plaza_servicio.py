@@ -16,6 +16,9 @@ class PlazaServicio():
     def save(self, plaza):
         self.repositorio.save(plaza)
 
+    def edit(self, plaza):
+        self.repositorio.save(plaza)
+
     def findAll(self):
         return self.repositorio.findAll()
 

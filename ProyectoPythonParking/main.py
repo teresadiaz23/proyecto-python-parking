@@ -1,3 +1,5 @@
+import pickle
+
 from controllers.admin_controller import admin_controller
 from controllers.cliente_abonado_controller import cliente_abonado_controller
 from controllers.cliente_controller import cliente_controller
@@ -11,7 +13,6 @@ from services.administrador_servicio import admin_servicio
 from services.parking_servicio import parking_servicio
 
 print(main_controller.bienvenida())
-print(parking_servicio.findAll().dinero_tickets)
 
 continuar = True
 

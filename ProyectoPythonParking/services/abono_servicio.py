@@ -16,6 +16,9 @@ class AbonoServicio():
     def save(self, abono):
         self.repositorio.save(abono)
 
+    def edit(self, abono):
+        self.repositorio.save(abono)
+
     def findAll(self):
         return self.repositorio.findAll()
 

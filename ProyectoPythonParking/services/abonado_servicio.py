@@ -21,6 +21,9 @@ class AbonadoServicio():
     def save(self, cliente):
         self.repositorio.save(cliente)
 
+    def edit(self, cliente):
+        self.repositorio.save(cliente)
+
     def findAll(self):
         return self.repositorio.findAll()
 

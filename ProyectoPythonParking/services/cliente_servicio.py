@@ -39,6 +39,7 @@ class ClienteServicio():
             ticket = Ticket(matricula, datetime.now(), plaza_asignada.id, pin)
             ticket_servicio.save(ticket)
 
+
         else:
             raise DatosErroneos
 
@@ -58,6 +59,7 @@ class ClienteServicio():
             total = tiempo * plaza.tarifa
             ticket.fecha_salida = hoy
             ticket.coste = total
+            ticket_servicio.edit(ticket)
             parking_servicio.findAll().dinero_tickets.append(total)
 
             plaza.ocupada = False

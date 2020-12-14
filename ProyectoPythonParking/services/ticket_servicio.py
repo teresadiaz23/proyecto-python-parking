@@ -16,6 +16,9 @@ class TicketServicio():
     def save(self, ticket):
         self.repositorio.save(ticket)
 
+    def edit(self, ticket):
+        self.repositorio.save(ticket)
+
     def findAll(self):
         return self.repositorio.findAll()
 
