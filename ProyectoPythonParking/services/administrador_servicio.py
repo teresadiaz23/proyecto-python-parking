@@ -204,7 +204,7 @@ class AdminServicio():
 
 admin_servicio = AdminServicio()
 # print(admin_servicio.comprobar_password("1234"))
-# print(admin_servicio.facturacion(datetime(2020, 10, 10), datetime(2020, 12, 10)))
+print(admin_servicio.facturacion(datetime(2020, 10, 10), datetime(2020, 12, 14)))
 # print(admin_servicio.consulta_cobro_abonados())
 # print(admin_servicio.alta_abono("1235", "Teresa", "Diaz", "14141241", "teresa@email.com", "1234FFF", "turismo", "mensual"))
 # print(admin_servicio.renovacion_abono("1234", 111, "anual"))

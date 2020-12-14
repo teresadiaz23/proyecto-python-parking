@@ -1,5 +1,6 @@
 from models.cliente_abonado import ClienteAbonado
 from models.vehiculo import Turismo, Motocicleta, MovilidadReducida
+import pickle
 
 
 class ClienteAbonadoRepositorio():
@@ -17,6 +18,10 @@ class ClienteAbonadoRepositorio():
 
     def save(self, cliente):
         self.lista_clientes.append(cliente)
+        filename = './datos/clientes'
+        outfile = open(filename, 'wb')
+        pickle.dump(self.lista_clientes, outfile)
+        outfile.close()
 
     def findAll(self):
         return self.lista_clientes
@@ -40,8 +45,21 @@ lista = [
     ClienteAbonado("12345678D", "Miguel", "Campos", "287698", "miguel@email.com", Turismo("3876KKK"), "anual", 30)
 ]
 
-cliente_abonado_repositorio = ClienteAbonadoRepositorio(lista)
+filename = './datos/clientes'
+outfile = open(filename, 'wb')
 
+pickle.dump(lista, outfile)
+outfile.close()
+
+infile = open(filename, 'rb')
+lista_clientes = pickle.load(infile)
+infile.close()
+
+
+cliente_abonado_repositorio = ClienteAbonadoRepositorio(lista_clientes)
+
+# for cliente in cliente_abonado_repositorio.findAll():
+#     print(cliente)
 
 # for c in cliente_abonado_repositorio.findAll():
 #     print(c)

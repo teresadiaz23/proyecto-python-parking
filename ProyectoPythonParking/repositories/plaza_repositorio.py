@@ -1,3 +1,5 @@
+import pickle
+
 from models.plaza import Plaza
 from repositories.cliente_abonado_repositorio import cliente_abonado_repositorio
 #from services.abonado_servicio import abonado_servicio
@@ -18,6 +20,10 @@ class PlazaRepositorio():
 
     def save(self, plaza):
         self.lista_plazas.append(plaza)
+        filename = './datos/plazas'
+        outfile = open(filename, 'wb')
+        pickle.dump(self.lista_plazas, outfile)
+        outfile.close()
 
     def findAll(self):
         return self.lista_plazas
@@ -46,7 +52,17 @@ plazas[44].cliente = cliente_abonado_repositorio.findAll()[1]
 plazas[51].cliente = cliente_abonado_repositorio.findAll()[2]
 plazas[29].cliente = cliente_abonado_repositorio.findAll()[3]
 
-plaza_repositorio = PlazaRepositorio(plazas)
+filename = './datos/plazas'
+outfile = open(filename, 'wb')
+
+pickle.dump(plazas, outfile)
+outfile.close()
+
+infile = open(filename, 'rb')
+lista_plazas = pickle.load(infile)
+infile.close()
+
+plaza_repositorio = PlazaRepositorio(lista_plazas)
 
 # for plaza in plaza_repositorio.findAll():
 #     print(plaza)

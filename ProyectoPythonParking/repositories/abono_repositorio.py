@@ -1,3 +1,4 @@
+import pickle
 from datetime import datetime, timedelta, date
 from dateutil.relativedelta import relativedelta
 
@@ -21,6 +22,10 @@ class AbonoRepositorio():
 
     def save(self, abono):
         self.lista_abonos.append(abono)
+        filename = './datos/abonos'
+        outfile = open(filename, 'wb')
+        pickle.dump(self.lista_abonos, outfile)
+        outfile.close()
 
     def findAll(self):
         return self.lista_abonos
@@ -49,7 +54,18 @@ abono3 = Abono(333, "semestral", datetime.now(), datetime.now() + relativedelta(
 abono4 = Abono(444, "anual", datetime.now(), datetime.now() + relativedelta(years=1), cliente_abonado_repositorio.findAll()[3], 200)
 
 lista_abonos = [abono1, abono2, abono3, abono4]
-abono_repositorio = AbonoRepositorio(lista_abonos)
+
+filename = './datos/abonos'
+outfile = open(filename, 'wb')
+
+pickle.dump(lista_abonos, outfile)
+outfile.close()
+
+infile = open(filename, 'rb')
+lista = pickle.load(infile)
+infile.close()
+
+abono_repositorio = AbonoRepositorio(lista)
 
 # for abono in abono_repositorio.findAll():
 #     print(abono)
