@@ -16,6 +16,9 @@ class AdminController():
                "Pulse 0 para salir"
 
 
+    def comprobar_password(self, password):
+        return admin_servicio.comprobar_password(password)
+
 
     def estado_parking(self):
         lista_plazas = parking_servicio.findAll().lista_plazas
