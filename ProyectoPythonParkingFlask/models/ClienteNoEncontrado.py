@@ -1,0 +1,2 @@
+class ClienteNoEncontrado(Exception):
+    pass
