@@ -21,24 +21,27 @@ class AbonadoServicio():
     def save(self, cliente):
         self.repositorio.save(cliente)
 
-    def findAll(self):
-        return self.repositorio.findAll()
+    def edit(self, cliente):
+        self.repositorio.save(cliente)
 
-    def findByDni(self, dni):
-        return self.repositorio.findByDni(dni)
+    def find_all(self):
+        return self.repositorio.find_all()
 
-    def findByMatricula(self, matricula):
-        return self.repositorio.findByMatricula(matricula)
+    def find_by_dni(self, dni):
+        return self.repositorio.find_by_dni(dni)
+
+    def find_by_matricula(self, matricula):
+        return self.repositorio.find_by_matricula(matricula)
 
 
     def depositar_abonados(self, matricula, dni):
         depositado = False
-        cliente = self.repositorio.findByDni(dni)
-        cliente2 = self.repositorio.findByMatricula(matricula)
+        cliente = self.repositorio.find_by_dni(dni)
+        cliente2 = self.repositorio.find_by_matricula(matricula)
 
         if(cliente == cliente2 and cliente != None):
             depositado = True
-            plaza = parking_servicio.findPlazaByCliente(cliente)
+            plaza = parking_servicio.find_plaza_by_cliente(cliente)
             plaza.ocupada = True
         if(not depositado):
             raise ClienteNoEncontrado
@@ -47,9 +50,9 @@ class AbonadoServicio():
 
     def retirar_abonados(self, matricula, id, pin):
         retirado = False
-        cliente = self.repositorio.findByMatricula(matricula)
-        plaza = parking_servicio.findPlazaById(id)
-        abono = abono_servicio.findByPin(pin)
+        cliente = self.repositorio.find_by_matricula(matricula)
+        plaza = parking_servicio.find_plaza_by_id(id)
+        abono = abono_servicio.find_by_pin(pin)
 
         if(cliente != None and abono != None):
             if(abono.cliente_abonado == cliente and plaza.ocupada):
@@ -63,9 +66,9 @@ class AbonadoServicio():
 
 
     def obtener_abono(self, dni, pin):
-        cliente = self.repositorio.findByDni(dni)
-        abono = abono_servicio.findByPin(pin)
-        abono2 = abono_servicio.findByCliente(cliente)
+        cliente = self.repositorio.find_by_dni(dni)
+        abono = abono_servicio.find_by_pin(pin)
+        abono2 = abono_servicio.find_by_cliente(cliente)
 
         if(abono == abono2):
             return abono
@@ -74,9 +77,9 @@ class AbonadoServicio():
             raise AbonoNoEncontrado
 
     def obtener_datos_personales(self, dni, pin):
-        cliente = self.repositorio.findByDni(dni)
-        abono = abono_servicio.findByPin(pin)
-        abono2 = abono_servicio.findByCliente(cliente)
+        cliente = self.repositorio.find_by_dni(dni)
+        abono = abono_servicio.find_by_pin(pin)
+        abono2 = abono_servicio.find_by_cliente(cliente)
 
         if(abono == abono2):
             return cliente

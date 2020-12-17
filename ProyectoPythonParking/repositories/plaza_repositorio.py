@@ -1,3 +1,5 @@
+import pickle
+
 from models.plaza import Plaza
 from repositories.cliente_abonado_repositorio import cliente_abonado_repositorio
 #from services.abonado_servicio import abonado_servicio
@@ -18,16 +20,20 @@ class PlazaRepositorio():
 
     def save(self, plaza):
         self.lista_plazas.append(plaza)
+        filename = './datos/plazas'
+        outfile = open(filename, 'wb')
+        pickle.dump(self.lista_plazas, outfile)
+        outfile.close()
 
-    def findAll(self):
+    def find_all(self):
         return self.lista_plazas
 
-    def findById(self, id):
+    def find_by_id(self, id):
         for plaza in self.lista_plazas:
             if(plaza.id == id):
                 return plaza
 
-    def findByCliente(self, cliente):
+    def find_by_cliente(self, cliente):
         for plaza in self.lista_plazas:
             if(plaza.cliente == cliente):
                 return plaza
@@ -41,12 +47,22 @@ for p in range(60):
     else:
         plazas.append(Plaza(p+1, "movilidad reducida", 0.10))
 
-plazas[2].cliente = cliente_abonado_repositorio.findAll()[0]
-plazas[44].cliente = cliente_abonado_repositorio.findAll()[1]
-plazas[51].cliente = cliente_abonado_repositorio.findAll()[2]
-plazas[29].cliente = cliente_abonado_repositorio.findAll()[3]
+plazas[2].cliente = cliente_abonado_repositorio.find_all()[0]
+plazas[44].cliente = cliente_abonado_repositorio.find_all()[1]
+plazas[51].cliente = cliente_abonado_repositorio.find_all()[2]
+plazas[29].cliente = cliente_abonado_repositorio.find_all()[3]
 
-plaza_repositorio = PlazaRepositorio(plazas)
+filename = './datos/plazas'
+outfile = open(filename, 'wb')
+
+pickle.dump(plazas, outfile)
+outfile.close()
+
+infile = open(filename, 'rb')
+lista_plazas = pickle.load(infile)
+infile.close()
+
+plaza_repositorio = PlazaRepositorio(lista_plazas)
 
 # for plaza in plaza_repositorio.findAll():
 #     print(plaza)

@@ -16,7 +16,7 @@ class ClienteController():
 
            if(cliente_servicio.depositar_vehiculo(matricula, tipo)):
                print("\nPuede aparcar su vehículo en la plaza asignada")
-               parking_controller.imprimir_ticket(ticket_servicio.findAll()[len(ticket_servicio.findAll()) - 1])
+               parking_controller.imprimir_ticket(ticket_servicio.find_all()[len(ticket_servicio.find_all()) - 1])
 
 
        except DatosErroneos:

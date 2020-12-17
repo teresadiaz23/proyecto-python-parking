@@ -14,20 +14,20 @@ class ParkingRepositorio():
     def parking(self, parking):
          self.__parking = parking
 
-    def findAll(self):
+    def find_all(self):
         return self.parking
 
-    def findPlazaByCliente(self, cliente):
+    def find_plaza_by_cliente(self, cliente):
         for plaza in self.parking.lista_plazas:
             if(plaza.cliente == cliente):
                 return plaza
 
-    def findPlazaById(self, id):
+    def find_plaza_by_id(self, id):
         for plaza in self.parking.lista_plazas:
             if(plaza.id == id):
                 return plaza
 
 
 parking_repositorio = ParkingRepositorio(parking)
-parking_repositorio.parking.lista_plazas = plaza_repositorio.findAll()
+parking_repositorio.parking.lista_plazas = plaza_repositorio.find_all()
 

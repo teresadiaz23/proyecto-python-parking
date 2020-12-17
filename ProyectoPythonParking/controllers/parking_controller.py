@@ -45,9 +45,9 @@ class ParkingController():
 
 
     def imprimir_abono_dni(self, dni, pin):
-        cliente = abonado_servicio.findByDni(dni)
-        abono = abono_servicio.findByCliente(cliente)
-        abono2 = abono_servicio.findByPin(pin)
+        cliente = abonado_servicio.find_by_dni(dni)
+        abono = abono_servicio.find_by_cliente(cliente)
+        abono2 = abono_servicio.find_by_pin(pin)
 
         try:
 
