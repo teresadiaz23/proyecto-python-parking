@@ -21,7 +21,7 @@ class AdminController():
 
 
     def estado_parking(self):
-        lista_plazas = parking_servicio.findAll().lista_plazas
+        lista_plazas = parking_servicio.find_all().lista_plazas
 
         for plaza in lista_plazas:
             if(plaza.ocupada == False and plaza.cliente == None):
@@ -45,8 +45,8 @@ class AdminController():
 
     def consulta_abonados(self):
         i = 1
-        if(len(abono_servicio.findAll()) > 0):
-            for abono in abono_servicio.findAll():
+        if(len(abono_servicio.find_all()) > 0):
+            for abono in abono_servicio.find_all():
                 print(f"\nAbono {i}\nTipo: {abono.tipo}\nId Plaza: {abono.cliente_abonado.id_plaza}\n"
                       f"Fecha Activacion: {abono.fecha_activacion.day}/{abono.fecha_activacion.month}/{abono.fecha_activacion.year}\n"
                       f"Fecha Caducidad: {abono.fecha_cancelacion.day}/{abono.fecha_cancelacion.month}/{abono.fecha_cancelacion.year}\n"
@@ -60,7 +60,7 @@ class AdminController():
         try:
             if(admin_servicio.alta_abono(dni, nombre, apellidos, num_tarjeta, email, matricula, tipo_vehiculo, tipo_abono)):
                 print("\nHa obtenido un abono correctamente")
-                parking_controller.imprimir_abono(abono_servicio.findAll()[len(abono_servicio.findAll()) - 1])
+                parking_controller.imprimir_abono(abono_servicio.find_all()[len(abono_servicio.find_all()) - 1])
 
 
         except DatosErroneos:

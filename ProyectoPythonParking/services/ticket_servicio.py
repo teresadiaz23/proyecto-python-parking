@@ -19,14 +19,14 @@ class TicketServicio():
     def edit(self, ticket):
         self.repositorio.save(ticket)
 
-    def findAll(self):
-        return self.repositorio.findAll()
+    def find_all(self):
+        return self.repositorio.find_all()
 
-    def findByPin(self, pin):
-        return self.repositorio.findByPin(pin)
+    def find_by_pin(self, pin):
+        return self.repositorio.find_by_pin(pin)
 
-    def findByMatricula(self, matricula):
-        return self.repositorio.findByMatricula(matricula)
+    def find_by_matricula(self, matricula):
+        return self.repositorio.find_by_matricula(matricula)
 
 
 ticket_servicio = TicketServicio(ticket_repositorio)

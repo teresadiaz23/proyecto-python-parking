@@ -19,14 +19,14 @@ class PlazaServicio():
     def edit(self, plaza):
         self.repositorio.save(plaza)
 
-    def findAll(self):
-        return self.repositorio.findAll()
+    def find_all(self):
+        return self.repositorio.find_all()
 
-    def findById(self, id):
-        return self.repositorio.findById(id)
+    def find_by_id(self, id):
+        return self.repositorio.find_by_id(id)
 
-    def findByCliente(self, cliente):
-        return self.repositorio.findByCliente(cliente)
+    def find_by_cliente(self, cliente):
+        return self.repositorio.find_by_cliente(cliente)
 
 
 plaza_servicio = PlazaServicio(plaza_repositorio)

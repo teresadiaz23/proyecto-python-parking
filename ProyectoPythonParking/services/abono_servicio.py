@@ -19,14 +19,14 @@ class AbonoServicio():
     def edit(self, abono):
         self.repositorio.save(abono)
 
-    def findAll(self):
-        return self.repositorio.findAll()
+    def find_all(self):
+        return self.repositorio.find_all()
 
-    def findByPin(self, pin):
-        return self.repositorio.findByPin(pin)
+    def find_by_pin(self, pin):
+        return self.repositorio.find_by_pin(pin)
 
-    def findByCliente(self, cliente):
-        return self.repositorio.findByCliente(cliente)
+    def find_by_cliente(self, cliente):
+        return self.repositorio.find_by_cliente(cliente)
 
     def delete(self, abono):
         self.repositorio.delete(abono)

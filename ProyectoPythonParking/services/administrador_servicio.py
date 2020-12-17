@@ -24,7 +24,7 @@ class AdminServicio():
         total = 0
         coste = []
 
-        for ticket in ticket_servicio.findAll():
+        for ticket in ticket_servicio.find_all():
             if(ticket.fecha_salida >= fecha1 and ticket.fecha_salida <= fecha2):
                 coste.append(ticket.coste)
 
@@ -37,8 +37,8 @@ class AdminServicio():
 
     def consulta_cobro_abonados(self):
         total = 0
-        if(len(parking_servicio.findAll().dinero_abonos) > 0):
-            for d in parking_servicio.findAll().dinero_abonos:
+        if(len(parking_servicio.find_all().dinero_abonos) > 0):
+            for d in parking_servicio.find_all().dinero_abonos:
                 total += d
 
         return round(total, 2)
@@ -87,7 +87,7 @@ class AdminServicio():
             abonado_servicio.save(cliente)
             abono_servicio.save(abono)
             plaza.cliente = cliente
-            parking_servicio.findAll().dinero_abonos.append(abono.precio)
+            parking_servicio.find_all().dinero_abonos.append(abono.precio)
 
         else:
             raise DatosErroneos
@@ -96,9 +96,9 @@ class AdminServicio():
 
     def renovacion_abono(self, dni, pin, tipo_abono):
         modificado = False
-        cliente = abonado_servicio.findByDni(dni)
-        abono = abono_servicio.findByCliente(cliente)
-        abono2 = abono_servicio.findByPin(pin)
+        cliente = abonado_servicio.find_by_dni(dni)
+        abono = abono_servicio.find_by_cliente(cliente)
+        abono2 = abono_servicio.find_by_pin(pin)
 
         if(abono == abono2 and abono != None):
             if(tipo_abono.lower() == "mensual"):
@@ -135,14 +135,14 @@ class AdminServicio():
         if(not modificado):
             raise DatosErroneos
 
-        parking_servicio.findAll().dinero_abonos.append(abono.precio)
+        parking_servicio.find_all().dinero_abonos.append(abono.precio)
         return modificado
 
     def modificar_datos_abono(self, dni, pin, nombre, apellidos, num_tarjeta, email):
         modificado = False
-        cliente = abonado_servicio.findByDni(dni)
-        abono = abono_servicio.findByCliente(cliente)
-        abono2 = abono_servicio.findByPin(pin)
+        cliente = abonado_servicio.find_by_dni(dni)
+        abono = abono_servicio.find_by_cliente(cliente)
+        abono2 = abono_servicio.find_by_pin(pin)
 
         if(abono == abono2 and abono != None):
             if(nombre != ""):
@@ -170,14 +170,14 @@ class AdminServicio():
         return modificado
 
     def borrar_abono(self, dni, pin):
-        cliente = abonado_servicio.findByDni(dni)
-        abono = abono_servicio.findByCliente(cliente)
-        abono2 = abono_servicio.findByPin(pin)
+        cliente = abonado_servicio.find_by_dni(dni)
+        abono = abono_servicio.find_by_cliente(cliente)
+        abono2 = abono_servicio.find_by_pin(pin)
         borrado = False
 
         if(abono == abono2 and abono != None):
             abono_servicio.delete(abono)
-            for plaza in parking_servicio.findAll().lista_plazas:
+            for plaza in parking_servicio.find_all().lista_plazas:
                 if(plaza.cliente == cliente):
                     plaza.cliente = None
 
@@ -189,7 +189,7 @@ class AdminServicio():
 
     def caducidad_abonos_mes(self, mes):
         abonos = []
-        for abono in abono_servicio.findAll():
+        for abono in abono_servicio.find_all():
             if(abono.fecha_cancelacion.month == int(mes)):
                 abonos.append(abono)
 
@@ -197,7 +197,7 @@ class AdminServicio():
 
     def caducidad_abonos_10_dias(self):
         abonos = []
-        for abono in abono_servicio.findAll():
+        for abono in abono_servicio.find_all():
             if(abono.fecha_cancelacion >= datetime.now() and abono.fecha_cancelacion <= (datetime.now() + relativedelta(days=10))):
                 abonos.append(abono)
         

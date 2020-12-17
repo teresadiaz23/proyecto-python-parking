@@ -24,15 +24,15 @@ class TicketRepositorio():
         pickle.dump(self.lista_tickets, outfile)
         outfile.close()
 
-    def findAll(self):
+    def find_all(self):
         return self.lista_tickets
 
-    def findByPin(self, pin):
+    def find_by_pin(self, pin):
         for ticket in self.lista_tickets:
             if(ticket.pin == pin):
                 return ticket
 
-    def findByMatricula(self, matricula):
+    def find_by_matricula(self, matricula):
         for ticket in self.lista_tickets:
             if(ticket.matricula == matricula):
                 return ticket

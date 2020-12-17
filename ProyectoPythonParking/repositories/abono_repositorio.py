@@ -27,15 +27,15 @@ class AbonoRepositorio():
         pickle.dump(self.lista_abonos, outfile)
         outfile.close()
 
-    def findAll(self):
+    def find_all(self):
         return self.lista_abonos
 
-    def findByPin(self, pin):
+    def find_by_pin(self, pin):
         for abono in self.lista_abonos:
             if(abono.pin == pin):
                 return abono
 
-    def findByCliente(self, cliente):
+    def find_by_cliente(self, cliente):
         for abono in self.lista_abonos:
             if(abono.cliente_abonado == cliente):
                 return abono
@@ -48,10 +48,10 @@ class AbonoRepositorio():
 
 
 
-abono1 = Abono(111, "mensual", datetime.now(), datetime.now() + relativedelta(months=1), cliente_abonado_repositorio.findAll()[0], 25)
-abono2 = Abono(222, "trimestral", datetime.now(), datetime.now() + relativedelta(months=3), cliente_abonado_repositorio.findAll()[1], 70)
-abono3 = Abono(333, "semestral", datetime.now(), datetime.now() + relativedelta(months=6), cliente_abonado_repositorio.findAll()[2], 130)
-abono4 = Abono(444, "anual", datetime.now(), datetime.now() + relativedelta(years=1), cliente_abonado_repositorio.findAll()[3], 200)
+abono1 = Abono(111, "mensual", datetime.now(), datetime.now() + relativedelta(months=1), cliente_abonado_repositorio.find_all()[0], 25)
+abono2 = Abono(222, "trimestral", datetime.now(), datetime.now() + relativedelta(months=3), cliente_abonado_repositorio.find_all()[1], 70)
+abono3 = Abono(333, "semestral", datetime.now(), datetime.now() + relativedelta(months=6), cliente_abonado_repositorio.find_all()[2], 130)
+abono4 = Abono(444, "anual", datetime.now(), datetime.now() + relativedelta(years=1), cliente_abonado_repositorio.find_all()[3], 200)
 
 lista_abonos = [abono1, abono2, abono3, abono4]
 

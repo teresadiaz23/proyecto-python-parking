@@ -46,9 +46,9 @@ class ClienteServicio():
         return depositado
 
     def retirar_vehiculo(self, matricula, id, pin):
-        ticket = ticket_servicio.findByPin(pin)
-        ticket2 = ticket_servicio.findByMatricula(matricula)
-        plaza = plaza_servicio.findById(id)
+        ticket = ticket_servicio.find_by_pin(pin)
+        ticket2 = ticket_servicio.find_by_matricula(matricula)
+        plaza = plaza_servicio.find_by_id(id)
         total = -1
 
         if(ticket != None and ticket == ticket2 and plaza != None):
@@ -60,7 +60,7 @@ class ClienteServicio():
             ticket.fecha_salida = hoy
             ticket.coste = total
             ticket_servicio.edit(ticket)
-            parking_servicio.findAll().dinero_tickets.append(total)
+            parking_servicio.find_all().dinero_tickets.append(total)
 
             plaza.ocupada = False
 

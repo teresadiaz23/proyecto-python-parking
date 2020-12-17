@@ -23,15 +23,15 @@ class ClienteAbonadoRepositorio():
         pickle.dump(self.lista_clientes, outfile)
         outfile.close()
 
-    def findAll(self):
+    def find_all(self):
         return self.lista_clientes
 
-    def findByDni(self, dni):
+    def find_by_dni(self, dni):
         for cliente in self.lista_clientes:
             if(cliente.dni == dni):
                 return cliente
 
-    def findByMatricula(self, matricula):
+    def find_by_matricula(self, matricula):
         for cliente in self.lista_clientes:
             if(cliente.vehiculo.matricula == matricula):
                 return cliente
