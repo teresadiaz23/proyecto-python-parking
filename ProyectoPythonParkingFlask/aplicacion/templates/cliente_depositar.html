@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Índice{% endblock %}
+{% block contenido %}
+	    <h2>Depositar vehículo</h2>
+
+	<form action={{url_for("depositar_cliente")}} method="post">
+	  <div class="form-group">
+		<label for="matricula">Introduce la matrícula de su vehículo:</label>
+		<input type="text" class="form-control" name="matricula" id="matricula">
+	  </div>
+	  <div class="form-group">
+		<label for="tipo">Introduce el tipo de vehículo (turismo, motocicleta o movilidad reducida):</label>
+		<input type="text" class="form-control" name="tipo" id="tipo">
+	  </div>
+
+	  <button type="submit" class="btn btn-primary">Enviar</button>
+	</form>
+
+{% endblock %}
