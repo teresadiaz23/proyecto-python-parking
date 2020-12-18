@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Abono Creado{% endblock %}
+{% block contenido %}
+	    <h2>Abono generado correctamente</h2>
+<div class="card col-6">
+  <div class="card-header">Abono</div>
+  <div class="card-body">
+	  <table>
+		  <tr>
+			<td class="col-2">Cliente</td>
+			<td class="col-3">{{abono.cliente_abonado.nombre}} {{abono.cliente_abonado.apellidos}}</td>
+		</tr>
+		<tr>
+			<td class="col-2">Tipo</td>
+			<td class="col-3">{{abono.tipo}}</td>
+		</tr>
+		<tr>
+			<td class="col-2">Pin</td>
+			<td class="col-3">{{abono.pin}}</td>
+		</tr>
+          <tr>
+			<td class="col-2">Id Plaza</td>
+			<td class="col-3">{{abono.cliente_abonado.id_plaza}}</td>
+		</tr>
+          <tr>
+			<td class="col-2">Fecha Activación</td>
+			<td class="col-3">{{abono.fecha_activacion.day}}/{{abono.fecha_activacion.month}}/{{abono.fecha_activacion.year}}</td>
+		</tr>
+		<tr>
+			<td class="col-2">Fecha Caducidad</td>
+			<td class="col-3">{{abono.fecha_cancelacion.day}}/{{abono.fecha_cancelacion.month}}/{{abono.fecha_cancelacion.year}}</td>
+		</tr>
+
+		  <tr>
+			  <td class="col-2">Precio</td>
+			  <td class="col-3">{{abono.precio}} €</td>
+		  </tr>
+	  </table>
+
+  </div>
+  <div class="card-footer">Footer</div>
+</div>
+
+
+
+
+{% endblock %}

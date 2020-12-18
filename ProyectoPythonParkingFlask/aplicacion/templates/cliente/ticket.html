@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Índice{% endblock %}
+{% block title %}Ticket{% endblock %}
 {% block contenido %}
 	    <h2>Puede aparcar su coche en la plaza seleccionada</h2>
 <div class="card col-6">
@@ -11,7 +11,7 @@
 			<td>{{ticket.matricula}}</td>
 		</tr>
 		<tr>
-			<td class="col-2">Fecha depósito:</td>
+			<td class="col-2">Fecha depósito</td>
 			<td>{{ticket.fecha_deposito.day}}/{{ticket.fecha_deposito.month}}/{{ticket.fecha_deposito.year}}</td>
 		</tr>
 		<tr>
@@ -27,11 +27,7 @@
 			  <td>{{ticket.pin}}</td>
 		  </tr>
 	  </table>
-	  	<!-- <p>Pin: </p>
-		<p>Matricula: {{ticket.matricula}}</p>
-		<p>Fecha depósito: {{ticket.fecha_deposito.day}}/{{ticket.fecha_deposito.month}}/{{ticket.fecha_deposito.year}}</p>
-		<p>Hora: {{ticket.fecha_deposito.hour}}:{{ticket.fecha_deposito.minute}}:{{ticket.fecha_deposito.second}} </p>
-		<p>Id Plaza: {{ticket.id_plaza}}  </p> -->
+
   </div>
   <div class="card-footer">Footer</div>
 </div>

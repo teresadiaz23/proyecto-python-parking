@@ -1,9 +1,9 @@
 {% extends "base.html" %}
-{% block title %}Índice{% endblock %}
+{% block title %}Cliente Depositar Vehículo{% endblock %}
 {% block contenido %}
 	    <h2>Depositar vehículo</h2>
 
-	<form action={{url_for("depositar_cliente")}} method="post">
+	<form action={{url_for("depositar_cliente")}} method="post" class="col-7">
 	  <div class="form-group">
 		<label for="matricula">Introduce la matrícula de su vehículo:</label>
 		<input type="text" class="form-control" name="matricula" id="matricula">

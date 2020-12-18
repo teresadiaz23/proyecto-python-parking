@@ -4,13 +4,13 @@ from dateutil.relativedelta import relativedelta
 
 from aplicacion.models import AbonoNoEncontrado
 from aplicacion.models import DatosErroneos
-from aplicacion.models import Abono
-from aplicacion.models import ClienteAbonado
-from aplicacion.models import Turismo, Motocicleta, MovilidadReducida
-from aplicacion.services import abonado_servicio
-from aplicacion.services import abono_servicio
+from aplicacion.models.abono import Abono
+from aplicacion.models.cliente_abonado import ClienteAbonado
+from aplicacion.models.vehiculo import Turismo, Motocicleta, MovilidadReducida
+from aplicacion.services.abonado_servicio import abonado_servicio
+from aplicacion.services.abono_servicio import abono_servicio
 from aplicacion.services.parking_servicio import parking_servicio
-from aplicacion.services import ticket_servicio
+from aplicacion.services.ticket_servicio import ticket_servicio
 
 
 
