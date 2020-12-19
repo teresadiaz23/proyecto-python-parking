@@ -32,4 +32,4 @@ class PlazaServicio():
 
 plaza_servicio = PlazaServicio(plaza_repositorio)
 
-print(plaza_servicio.find_by_cliente(cliente_abonado_repositorio.find_by_dni("1234")))
+# print(plaza_servicio.find_by_cliente(cliente_abonado_repositorio.find_by_dni("1234")))

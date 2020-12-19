@@ -19,10 +19,10 @@ class TicketRepositorio():
 
     def save(self, ticket):
         self.lista_tickets.append(ticket)
-        filename = './aplicacion/datos/tickets'
-        outfile = open(filename, 'wb')
-        pickle.dump(self.lista_tickets, outfile)
-        outfile.close()
+        # filename = './aplicacion/datos/tickets'
+        # outfile = open(filename, 'wb')
+        # pickle.dump(self.lista_tickets, outfile)
+        # outfile.close()
 
     def find_all(self):
         return self.lista_tickets
@@ -44,14 +44,14 @@ lista_tickets = [
     Ticket("1234FFF", datetime(2020, 12, 14, 15, 30), 6, 111111, datetime(2020, 12, 14, 17, 30), 6)
 ]
 
-filename = './aplicacion/datos/tickets'
-outfile = open(filename, 'wb')
+# filename = './aplicacion/datos/tickets'
+# outfile = open(filename, 'wb')
+#
+# pickle.dump(lista_tickets, outfile)
+# outfile.close()
+#
+# infile = open(filename, 'rb')
+# tickets = pickle.load(infile)
+# infile.close()
 
-pickle.dump(lista_tickets, outfile)
-outfile.close()
-
-infile = open(filename, 'rb')
-tickets = pickle.load(infile)
-infile.close()
-
-ticket_repositorio = TicketRepositorio(tickets)
+ticket_repositorio = TicketRepositorio(lista_tickets)

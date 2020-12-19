@@ -136,15 +136,16 @@ def depositar_abonados():
     if request.method == 'POST':
         matricula = request.form.get("matricula")
         dni = request.form.get("dni")
-        #try:
-        if(abonado_servicio.depositar_abonados(matricula, dni)):
+        try:
+            if(abonado_servicio.depositar_abonados(matricula, dni)):
                 #print("\nPuede aparcar su vehículo")
-            return render_template("./abonado/confirmacion.html", matricula=matricula, dni=dni)
+                return render_template("./abonado/confirmacion.html", matricula=matricula, dni=dni,
+                                   mensaje="Puede aparcar su vehículo")
 
-        # except:
-        #     return render_template("./errores/error.html", error="No se encuentra ningún cliente abonado con esos datos")
-
-    return render_template("./abonado/abonado_depositar.html")
+        except:
+            return render_template("./errores/error.html", error="No se encuentra ningún cliente abonado con esos datos")
+    else:
+        return render_template("./abonado/abonado_depositar.html")
 
 @app.route('/abonado/retirar/', methods=["get", "post"])
 def retirar_abonados():
@@ -155,12 +156,15 @@ def retirar_abonados():
             id = int(request.form.get("id"))
             pin = int(request.form.get("pin"))
             if(abonado_servicio.retirar_abonados(matricula, id, pin)):
-                print("\nPuede retirar su vehículo")
+                return render_template("./abonado/confirmacion.html", matricula=matricula, id=id, pin=pin,
+                                       mensaje="Puede retirar su vehículo")
+                # print("\nPuede retirar su vehículo")
 
-        except ClienteNoEncontrado:
-            print("\nNo se encuentra ningún cliente abonado con esos datos")
+        except:
+            return render_template("./errores/error.html", error="No se encuentra ningún cliente abonado con esos datos")
 
-    return render_template("./abonado/abonado_retirar.html")
+    else:
+        return render_template("./abonado/abonado_retirar.html")
 
 
 @app.route('/abonado/abono/', methods=["get", "post"])
@@ -170,10 +174,14 @@ def consultar_abono():
             dni = request.form.get("dni")
             pin = int(request.form.get("pin"))
             if(abonado_servicio.obtener_abono(dni, pin) != None):
-                parking_controller.imprimir_abono_dni(dni, pin)
+                abono = parking_controller.imprimir_abono_dni(dni, pin)
+                return render_template("./abonado/abono.html", dni=dni, pin=pin,
+                                       abono=abono)
 
-        except AbonoNoEncontrado:
-            print("\nNo existe ningún abono con esos datos")
+        except:
+            return render_template("./errores/error.html", error="No existe ningún abono con esos datos")
+            #print("\nNo existe ningún abono con esos datos")
+    else:
         return render_template("./abonado/abonado_ver_abono.html")
 
 @app.route('/abonado/datos-personales/', methods=["get", "post"])

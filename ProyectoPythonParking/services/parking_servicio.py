@@ -59,7 +59,7 @@ class ParkingServicio():
 
 parking_servicio = ParkingServicio(parking_repositorio)
 
-print(parking_servicio.find_plaza_by_cliente(cliente_abonado_repositorio.find_by_dni("12345678B")))
-print(parking_servicio.find_plaza_by_id(3))
+# print(parking_servicio.find_plaza_by_cliente(cliente_abonado_repositorio.find_by_dni("12345678B")))
+# print(parking_servicio.find_plaza_by_id(3))
 # for plaza in parking_servicio.find_all().lista_plazas:
 #     print(plaza)
