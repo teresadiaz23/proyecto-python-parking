@@ -1,32 +1,31 @@
 <{% extends "base.html" %}
 {% block title %}Índice{% endblock %}
 {% block contenido %}
-	    <h2>¿Qué desea hacer?</h2>
+	    <h2>Renovar abono</h2>
+	<form action={{url_for("renovar_abono")}} method="post" class="col-7 mb-5">
+	  <div class="form-group">
+		<label for="dni">Introduce su dni:</label>
+		<input type="text" class="form-control" name="dni" id="dni">
+	  </div>
+	  <div class="form-group">
+		<label for="pin">Introduce su pin:</label>
+		<input type="text" class="form-control" name="pin" id="pin">
+	  </div>
 
-        <ul class="list-group col-4">
-          <li class="list-group-item">
-              <a class="nav-link" href="{{url_for('depositar_abonados')}}">Depositar un vehículo</a>
-          </li>
-          <li class="list-group-item">
-              <a class="nav-link" href="{{url_for('retirar_abonados')}}">Retirar un vehículo</a>
-          </li>
-          <li class="list-group-item">
-              <a class="nav-link" href="{{url_for('consultar_abono')}}">Ver su abono</a>
-          </li>
-            <li class="list-group-item">
-              <a class="nav-link" href="{{url_for('consultar_datos_personales')}}">Ver sus datos personales</a>
-          </li>
-          <li class="list-group-item">
-              <a class="nav-link" href="{{url_for('modificar_datos_abono')}}">Modificar datos personales</a>
-          </li>
-          <li class="list-group-item">
-              <a class="nav-link" href="{{url_for('renovar_abono')}}">Renovar su abono</a>
-          </li>
-            <li class="list-group-item">
-              <a class="nav-link" href="{{url_for('borrar_abono')}}">Borrar su abono</a>
-          </li>
-        </ul>
+		<div class="form-group">
+			<label for="tipo_abono">Introduce el tipo de abono: </label>
 
+			<select class="custom-select my-1 mr-sm-2" name="tipo_abono" id="tipo_abono">
+				<option selected>Elegir...</option>
+  				<option value="mensual">Mensual</option>
+  				<option value="trimestral">Trimestral</option>
+  				<option value="semestral">Semestral</option>
+				<option value="anual">Anual</option>
+  		</select>
+	  </div>
+
+	  <button type="submit" class="btn btn-primary">Enviar</button>
+	</form>
 
 
 

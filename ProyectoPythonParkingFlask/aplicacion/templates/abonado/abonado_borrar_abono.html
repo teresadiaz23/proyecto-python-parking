@@ -1,31 +1,19 @@
 <{% extends "base.html" %}
 {% block title %}Índice{% endblock %}
 {% block contenido %}
-	    <h2>¿Qué desea hacer?</h2>
+	   <h2>Borrar abono</h2>
+	<form action={{url_for("borrar_abono")}} method="post" class="col-7 mb-5">
+	  <div class="form-group">
+		<label for="dni">Introduce su dni:</label>
+		<input type="text" class="form-control" name="dni" id="dni">
+	  </div>
+	  <div class="form-group">
+		<label for="pin">Introduce su pin:</label>
+		<input type="text" class="form-control" name="pin" id="pin">
+	  </div>
 
-        <ul class="list-group col-4">
-          <li class="list-group-item">
-              <a class="nav-link" href="{{url_for('depositar_abonados')}}">Depositar un vehículo</a>
-          </li>
-          <li class="list-group-item">
-              <a class="nav-link" href="{{url_for('retirar_abonados')}}">Retirar un vehículo</a>
-          </li>
-          <li class="list-group-item">
-              <a class="nav-link" href="{{url_for('consultar_abono')}}">Ver su abono</a>
-          </li>
-            <li class="list-group-item">
-              <a class="nav-link" href="{{url_for('consultar_datos_personales')}}">Ver sus datos personales</a>
-          </li>
-          <li class="list-group-item">
-              <a class="nav-link" href="{{url_for('modificar_datos_abono')}}">Modificar datos personales</a>
-          </li>
-          <li class="list-group-item">
-              <a class="nav-link" href="{{url_for('renovar_abono')}}">Renovar su abono</a>
-          </li>
-            <li class="list-group-item">
-              <a class="nav-link" href="{{url_for('borrar_abono')}}">Borrar su abono</a>
-          </li>
-        </ul>
+	  <button type="submit" class="btn btn-danger">Borrar</button>
+	</form>
 
 
 

@@ -176,7 +176,7 @@ def consultar_abono():
             if(abonado_servicio.obtener_abono(dni, pin) != None):
                 abono = parking_controller.imprimir_abono_dni(dni, pin)
                 return render_template("./abonado/abono.html", dni=dni, pin=pin,
-                                       abono=abono)
+                                       abono=abono, mensaje="")
 
         except:
             return render_template("./errores/error.html", error="No existe ningún abono con esos datos")
@@ -193,13 +193,16 @@ def consultar_datos_personales():
 
             if(abonado_servicio.obtener_datos_personales(dni, pin) != None):
                 cliente = abonado_servicio.obtener_datos_personales(dni, pin)
-                print(f"\nNombre: {cliente.nombre}\n"
-                      f"Apellidos: {cliente.apellidos}\n"
-                      f"Email: {cliente.email}\n"
-                      f"DNI: {cliente.dni}")
-        except ClienteNoEncontrado:
-            print("\nNo se encuentra ningún cliente abonado con esos datos")
-
+                return render_template("./abonado/datos.html", dni=dni, pin=pin, cliente=cliente,
+                                       mensaje="Datos abono")
+                # print(f"\nNombre: {cliente.nombre}\n"
+                #       f"Apellidos: {cliente.apellidos}\n"
+                #       f"Email: {cliente.email}\n"
+                #       f"DNI: {cliente.dni}")
+        except:
+            return render_template("./errores/error.html", error="No se encuentra ningún cliente abonado con esos datos")
+            #print("\nNo se encuentra ningún cliente abonado con esos datos")
+    else:
         return render_template("./abonado/abonado_ver_datos.html")
 
 
@@ -216,15 +219,19 @@ def modificar_datos_abono():
 
 
             if(admin_servicio.modificar_datos_abono(dni, pin, nombre, apellidos, num_tarjeta, email)):
-                print("\nLos datos se han modificado correctamente")
+                #print("\nLos datos se han modificado correctamente")
                 cliente = abonado_servicio.obtener_datos_personales(dni, pin)
-                print(f"Nombre: {cliente.nombre}\nApellidos: {cliente.apellidos}\nEmail: {cliente.email}"
-                      f"\nDNI: {cliente.dni}")
+                # print(f"Nombre: {cliente.nombre}\nApellidos: {cliente.apellidos}\nEmail: {cliente.email}"
+                #       f"\nDNI: {cliente.dni}")
+                return render_template("./abonado/datos.html", dni=dni, pin=pin, cliente=cliente,
+                                       mensaje="Los datos se han modificado correctamente")
         except AbonoNoEncontrado:
-            print("\nNo existe ningún abono con esos datos")
+            return render_template("./errores/error.html", error="No existe ningún abono con esos datos")
+            #print("\nNo existe ningún abono con esos datos")
         except DatosErroneos:
-            print("\nNo se han podido modificar los datos")
-
+            return render_template("./errores/error.html", error="No se han podido modificar los datos")
+            #print("\nNo se han podido modificar los datos")
+    else:
         return render_template("./abonado/abonado_modificar_datos.html")
 
 
@@ -237,14 +244,18 @@ def renovar_abono():
             tipo_abono = request.form.get("tipo_abono")
 
             if(admin_servicio.renovacion_abono(dni, pin, tipo_abono)):
-                print("\nSu abono se ha renovado correctamente")
-                parking_controller.imprimir_abono_dni(dni, pin)
+                #print("\nSu abono se ha renovado correctamente")
+                abono = parking_controller.imprimir_abono_dni(dni, pin)
+                return render_template("./abonado/abono.html", dni=dni, pin=pin, tipo_abono=tipo_abono, abono=abono,
+                                       mensaje="Su abono se ha renovado correctamente")
 
-        except AbonoNoEncontrado:
-            print("\nNo existe ningún abono con esos datos")
-        except DatosErroneos:
-            print("\nNo se han podido modificar los datos")
-
+        except:
+            return render_template("./errores/error.html", error="No existe ningún abono con esos datos")
+            #print("\nNo existe ningún abono con esos datos")
+        # except:
+        #     return render_template("./errores/error.html", error="No se han podido modificar los datos")
+            #print("\nNo se han podido modificar los datos")
+    else:
         return render_template("./abonado/abonado_renovar_abono.html")
 
 
@@ -255,13 +266,14 @@ def borrar_abono():
             dni = request.form.get("dni")
             pin = int(request.form.get("pin"))
 
-
             if(admin_servicio.borrar_abono(dni, pin)):
-                print("\nEl abono se ha borrado correctamente")
-
-        except AbonoNoEncontrado:
-            print("\nNo existe ningún abono con esos datos")
-
+                #print("\nEl abono se ha borrado correctamente")
+                return render_template("./abonado/confirmacion.html", dni=dni, pin=pin,
+                                       mensaje="El abono se ha borrado correctamente")
+        except:
+            return render_template("./errores/error.html", error="No existe ningún abono con esos datos")
+            #print("\nNo existe ningún abono con esos datos")
+    else:
         return render_template("./abonado/abonado_borrar_abono.html")
 
 
