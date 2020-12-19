@@ -20,10 +20,10 @@ class PlazaRepositorio():
 
     def save(self, plaza):
         self.lista_plazas.append(plaza)
-        filename = './aplicacion/datos/plazas'
-        outfile = open(filename, 'wb')
-        pickle.dump(self.lista_plazas, outfile)
-        outfile.close()
+        # filename = './aplicacion/datos/plazas'
+        # outfile = open(filename, 'wb')
+        # pickle.dump(self.lista_plazas, outfile)
+        # outfile.close()
 
     def find_all(self):
         return self.lista_plazas
@@ -52,17 +52,17 @@ plazas[44].cliente = cliente_abonado_repositorio.find_all()[1]
 plazas[51].cliente = cliente_abonado_repositorio.find_all()[2]
 plazas[29].cliente = cliente_abonado_repositorio.find_all()[3]
 
-filename = './aplicacion/datos/plazas'
-outfile = open(filename, 'wb')
+# filename = './aplicacion/datos/plazas'
+# outfile = open(filename, 'wb')
+#
+# pickle.dump(plazas, outfile)
+# outfile.close()
+#
+# infile = open(filename, 'rb')
+# lista_plazas = pickle.load(infile)
+# infile.close()
 
-pickle.dump(plazas, outfile)
-outfile.close()
-
-infile = open(filename, 'rb')
-lista_plazas = pickle.load(infile)
-infile.close()
-
-plaza_repositorio = PlazaRepositorio(lista_plazas)
+plaza_repositorio = PlazaRepositorio(plazas)
 
 # for plaza in plaza_repositorio.findAll():
 #     print(plaza)

@@ -1,7 +1,7 @@
-from aplicacion.controllers import admin_controller
+from aplicacion.controllers.admin_controller import admin_controller
 from aplicacion.controllers.cliente_abonado_controller import cliente_abonado_controller
 from aplicacion.controllers.cliente_controller import cliente_controller
-from aplicacion.controllers import main_controller
+from aplicacion.controllers.main_controller import main_controller
 from aplicacion.controllers.parking_controller import parking_controller
 
 from datetime import datetime

@@ -51,19 +51,20 @@ class ParkingController():
         try:
 
             if(abono == abono2 and abono != None):
-                print("-"*40)
-                print("|               Abono                  |")
-                print("|                                      |")
-                print(f"|    Cliente: {abono.cliente_abonado.nombre} {abono.cliente_abonado.apellidos}             |")
-                print(f"|    Tipo: {abono.tipo}                     |")
-                print(f"|    Pin: {abono.pin}                       |")
-                print(f"|    Id Plaza: {abono.cliente_abonado.id_plaza}                       |")
-                print(f"|    Fecha Activación: {abono.fecha_activacion.day}/{abono.fecha_activacion.month}/{abono.fecha_activacion.year}      |")
-                print(f"|    Fecha Caducidad: {abono.fecha_cancelacion.day}/{abono.fecha_cancelacion.month}/{abono.fecha_cancelacion.year}        |")
-                print(f"|    Precio: {abono.precio} €                      |")
-                print("|                                      |")
-                print("|                                      |")
-                print("-"*40)
+                return abono
+                # print("-"*40)
+                # print("|               Abono                  |")
+                # print("|                                      |")
+                # print(f"|    Cliente: {abono.cliente_abonado.nombre} {abono.cliente_abonado.apellidos}             |")
+                # print(f"|    Tipo: {abono.tipo}                     |")
+                # print(f"|    Pin: {abono.pin}                       |")
+                # print(f"|    Id Plaza: {abono.cliente_abonado.id_plaza}                       |")
+                # print(f"|    Fecha Activación: {abono.fecha_activacion.day}/{abono.fecha_activacion.month}/{abono.fecha_activacion.year}      |")
+                # print(f"|    Fecha Caducidad: {abono.fecha_cancelacion.day}/{abono.fecha_cancelacion.month}/{abono.fecha_cancelacion.year}        |")
+                # print(f"|    Precio: {abono.precio} €                      |")
+                # print("|                                      |")
+                # print("|                                      |")
+                # print("-"*40)
             else:
                 raise AbonoNoEncontrado
 

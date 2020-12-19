@@ -28,15 +28,27 @@
 		<input type="text" class="form-control" name="matricula" id="matricula">
 	  </div>
 	  <div class="form-group">
-		<label for="tipo_vehiculo">Introduce el tipo de vehículo (turismo, motocicleta o movilidad reducida):</label>
-		<input type="text" class="form-control" name="tipo_vehiculo" id="tipo_vehiculo">
+		<label for="tipo_vehiculo">Introduce el tipo de su vehículo:</label>
+		  <select class="custom-select my-1 mr-sm-2" name="tipo_vehiculo" id="tipo_vehiculo">
+			  <option selected>Elegir...</option>
+  			<option value="turismo">Turismo</option>
+  			<option value="motocicleta">Motocicleta</option>
+  			<option value="movilidad reducida">Movilidad reducida</option>
+  		</select>
 	  </div>
 		<div class="form-group">
-		<label for="tipo_abono">Introduce el tipo de abono (mensual, trimestral, semestral o anual): </label>
-		<input type="text" class="form-control" name="tipo_abono" id="tipo_abono">
+			<label for="tipo_abono">Introduce el tipo de abono: </label>
+
+			<select class="custom-select my-1 mr-sm-2" name="tipo_abono" id="tipo_abono">
+				<option selected>Elegir...</option>
+  				<option value="mensual">Mensual</option>
+  				<option value="trimestral">Trimestral</option>
+  				<option value="semestral">Semestral</option>
+				<option value="anual">Anual</option>
+  		</select>
 	  </div>
 
-	  <button type="submit" class="btn btn-primary">Enviar</button>
+	  <button type="submit" class="btn btn-success">Enviar</button>
 	</form>
 
 

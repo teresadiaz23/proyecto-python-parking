@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Índice{% endblock %}
+{% block contenido %}
+	    <h2>Ver datos abono</h2>
+
+	<form action={{url_for("consultar_datos_personales")}} method="post" class="col-7">
+	  <div class="form-group">
+		<label for="dni">Introduce su dni:</label>
+		<input type="text" class="form-control" name="dni" id="dni">
+	  </div>
+        <div class="form-group">
+		<label for="pin">Introduce su pin:</label>
+		<input type="text" class="form-control" name="pin" id="pin">
+	  </div>
+
+	  <button type="submit" class="btn btn-primary">Enviar</button>
+	</form>
+
+
+
+{% endblock %}

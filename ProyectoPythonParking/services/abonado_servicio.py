@@ -42,6 +42,7 @@ class AbonadoServicio():
         if(cliente == cliente2 and cliente != None):
             depositado = True
             plaza = parking_servicio.find_plaza_by_cliente(cliente)
+            print(cliente)
             plaza.ocupada = True
         if(not depositado):
             raise ClienteNoEncontrado
