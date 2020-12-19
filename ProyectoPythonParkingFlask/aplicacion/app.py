@@ -1,6 +1,9 @@
+from datetime import datetime
+
 from flask import Flask, render_template, abort, request
 from flask_bootstrap import Bootstrap
 
+from aplicacion.controllers.admin_controller import admin_controller
 from aplicacion.controllers.parking_controller import parking_controller
 from aplicacion.models import DatosErroneos
 from aplicacion.services.cliente_servicio import cliente_servicio
@@ -57,7 +60,12 @@ def depositar_cliente():
 
 
     else:
-        return render_template("./cliente/cliente_depositar.html")
+        libres_t = len(parking_servicio.plazas_libres_turismo())
+        libres_m = len(parking_servicio.plazas_libres_moto())
+        libres_mvr = len(parking_servicio.plazas_libres_movreducida())
+
+        return render_template("./cliente/cliente_depositar.html", libres_t=libres_t, libres_m=libres_m,
+                               libres_mvr=libres_mvr)
 
 
 
@@ -282,5 +290,97 @@ def borrar_abono():
 @app.route('/admin/')
 def admin_index():
 
-        return render_template("cliente_index.html")
+        return render_template("./administrador/admin_index.html")
 
+
+@app.route('/admin/estado_parking/')
+def estado_parking():
+
+    lista_plazas = parking_servicio.find_all().lista_plazas
+    return render_template("./administrador/estado_parking.html", lista_plazas=lista_plazas)
+
+
+
+@app.route('/admin/facturacion/', methods=["get", "post"])
+def facturacion():
+
+    if request.method == 'POST':
+        fecha1 = request.form.get("fecha1")
+        fecha2 = request.form.get("fecha2")
+
+        lista1 = fecha1.split(",")
+        lista2 = fecha2.split(",")
+        fecha1 = datetime(int(lista1[0]), int(lista1[1]), int(lista1[2]), int(lista1[3]), int(lista1[4]))
+        fecha2 = datetime(int(lista2[0]), int(lista2[1]), int(lista2[2]), int(lista2[3]), int(lista2[4]))
+        fac = admin_servicio.facturacion(fecha1, fecha2)
+        # print(f"\nFacturación entre {fecha1.day}/{fecha1.month}/{fecha1.year} {fecha1.hour}:{fecha1.minute}h "
+        #       f"y el {fecha2.day}/{fecha2.month}/{fecha2.year} {fecha2.hour}:{fecha2.minute}h "
+        #       f"--> {admin_servicio.facturacion(fecha1, fecha2)} €")
+
+        return render_template("./administrador/facturacion.html", fecha1=fecha1, fecha2=fecha2, fac=fac)
+    else:
+       return render_template("./administrador/ver_facturacion.html")
+
+
+@app.route('/admin/abonados/')
+def consulta_abonados():
+        index = 1
+        if(len(abono_servicio.find_all()) > 0):
+            abonos = abono_servicio.find_all()
+            total = admin_servicio.consulta_cobro_abonados()
+        #     for abono in abono_servicio.find_all():
+        #         print(f"\nAbono {i}\nTipo: {abono.tipo}\nId Plaza: {abono.cliente_abonado.id_plaza}\n"
+        #               f"Fecha Activacion: {abono.fecha_activacion.day}/{abono.fecha_activacion.month}/{abono.fecha_activacion.year}\n"
+        #               f"Fecha Caducidad: {abono.fecha_cancelacion.day}/{abono.fecha_cancelacion.month}/{abono.fecha_cancelacion.year}\n"
+        #               f"Precio: {abono.precio} €")
+        #         i+=1
+        # print(f"\nTotal facturado con los abonos: {admin_servicio.consulta_cobro_abonados()} €")
+        return render_template("./administrador/abonados.html", abonos=abonos, total=total, index=index)
+
+
+
+@app.route('/admin/caducidad_mes/', methods=["get", "post"])
+def caducidad_abonos_mes():
+    if request.method == 'POST':
+        try:
+            mes = int(request.form.get("mes"))
+            abonos = admin_servicio.caducidad_abonos_mes(mes)
+            cant = len(abonos)
+
+            mes_letra = parking_controller.imprimir_mes(mes)
+            return render_template("./administrador/abonos_caducidad.html", abonos=abonos, mes=mes, mes_letra=mes_letra,
+                                   cant=cant)
+
+        except:
+            return render_template("./errores/error.html", error="Ese mes no existe")
+        #if(len(abonos) > 0):
+            # i = 1
+            # for abono in abonos:
+            #     print(f"\nAbono {i}\nTipo: {abono.tipo}\nId Plaza: {abono.cliente_abonado.id_plaza}\n"
+            #           f"Fecha Activacion: {abono.fecha_activacion.day}/{abono.fecha_activacion.month}/{abono.fecha_activacion.year}\n"
+            #           f"Fecha Caducidad: {abono.fecha_cancelacion.day}/{abono.fecha_cancelacion.month}/{abono.fecha_cancelacion.year}\n"
+            #           f"Precio: {abono.precio} €")
+            #     i += 1
+
+        # else:
+        #     return render_template("./administrador/abonados.html", abonos=abonos, total=total, index=index)
+        #     print("\nNo hay abonos que caduquen en el mes indicado")
+    else:
+        return render_template("./administrador/caducidad_mes.html")
+
+@app.route('/admin/caducidad-10-dias/')
+def caducidad_abonos_proximos_10_dias():
+        abonos = admin_servicio.caducidad_abonos_10_dias()
+        cant = len(abonos)
+        # if(len(abonos) > 0):
+        #     i = 1
+        #     for abono in abonos:
+        #         print(f"\nAbono {i}\nTipo: {abono.tipo}\nId Plaza: {abono.cliente_abonado.id_plaza}\n"
+        #               f"Fecha Activacion: {abono.fecha_activacion.day}/{abono.fecha_activacion.month}/{abono.fecha_activacion.year}\n"
+        #               f"Fecha Caducidad: {abono.fecha_cancelacion.day}/{abono.fecha_cancelacion.month}/{abono.fecha_cancelacion.year}\n"
+        #               f"Precio: {abono.precio} €")
+        #         i += 1
+        #
+        # else:
+        #     print("\nNo hay abonos que caduquen en los próximos 10 días")
+        return render_template("./administrador/caducidad_10_dias.html", abonos=abonos, cant=cant)

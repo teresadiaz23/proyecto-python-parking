@@ -3,6 +3,10 @@
 {% block contenido %}
 	    <h2>Depositar vehículo</h2>
 
+	<p>Actualmente hay {{libres_t}} plazas de turismos,
+              {{libres_m}} plazas de motocicletas y
+              {{libres_mvr}} plazas de movilidad reducida libres</p>
+
 	<form action={{url_for("depositar_cliente")}} method="post" class="col-7">
 	  <div class="form-group">
 		<label for="matricula">Introduce la matrícula de su vehículo:</label>

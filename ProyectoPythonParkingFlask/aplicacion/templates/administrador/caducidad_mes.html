@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Índice{% endblock %}
+{% block contenido %}
+	    <h2>Ver facturación</h2>
+
+	<form action={{url_for("caducidad_abonos_mes")}} method="post" class="col-7">
+	  <div class="form-group">
+			<label for="mes">Selecciona el mes: </label>
+
+			<select class="custom-select my-1 mr-sm-2" name="mes" id="mes">
+				<option selected>Elegir...</option>
+  				<option value="1">Enero</option>
+  				<option value="2">Febrero</option>
+  				<option value="3">Marzo</option>
+				<option value="4">Abril</option>
+                <option value="5">Mayo</option>
+  				<option value="6">Junio</option>
+  				<option value="7">Julio</option>
+				<option value="8">Agosto</option>
+                <option value="9">Septiembre</option>
+  				<option value="10">Octubre</option>
+  				<option value="11">Noviembre</option>
+				<option value="12">Diciembre</option>
+  		</select>
+	  </div>
+
+	  <button type="submit" class="btn btn-primary">Enviar</button>
+	</form>
+
+
+
+{% endblock %}

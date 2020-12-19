@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Índice{% endblock %}
+{% block contenido %}
+	    <h2>Abonados</h2>
+<table class="table table-striped">
+          <thead>
+            <tr>
+                <th scope="col">Nº</th>
+              <th scope="col">Tipo</th>
+              <th scope="col">Id Plaza</th>
+              <th scope="col">Fecha Activacion</th>
+                <th scope="col">Fecha Caducidad</th>
+              <th scope="col">Precio</th>
+
+            </tr>
+          </thead>
+          <tbody>
+          {%for abono in abonos%}
+                <tr>
+                    <th scope="row">{{index}}</th>
+                    <td>{{abono.tipo.capitalize()}}</td>
+                    <td>{{abono.cliente_abonado.id_plaza}}</td>
+                    <td>{{abono.fecha_activacion.day}}/{{abono.fecha_activacion.month}}/{{abono.fecha_activacion.year}}</td>
+                    <td>{{abono.fecha_cancelacion.day}}/{{abono.fecha_cancelacion.month}}/{{abono.fecha_cancelacion.year}}</td>
+
+                    <td>{{abono.precio}} €</td>
+                </tr>
+                {%endfor%}
+
+          </tbody>
+            <tfoot>Total facturado con los abonos: {{total}}</tfoot>
+        </table>
+
+
+{% endblock %}
