@@ -52,6 +52,7 @@ plazas[44].cliente = cliente_abonado_repositorio.find_all()[1]
 plazas[51].cliente = cliente_abonado_repositorio.find_all()[2]
 plazas[29].cliente = cliente_abonado_repositorio.find_all()[3]
 
+
 filename = './datos/plazas'
 outfile = open(filename, 'wb')
 
@@ -64,5 +65,5 @@ infile.close()
 
 plaza_repositorio = PlazaRepositorio(lista_plazas)
 
-# for plaza in plaza_repositorio.findAll():
+# for plaza in plaza_repositorio.find_all():
 #     print(plaza)

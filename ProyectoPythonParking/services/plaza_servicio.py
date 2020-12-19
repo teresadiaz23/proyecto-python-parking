@@ -1,3 +1,4 @@
+from repositories.cliente_abonado_repositorio import cliente_abonado_repositorio
 from repositories.plaza_repositorio import plaza_repositorio
 
 
@@ -30,3 +31,5 @@ class PlazaServicio():
 
 
 plaza_servicio = PlazaServicio(plaza_repositorio)
+
+print(plaza_servicio.find_by_cliente(cliente_abonado_repositorio.find_by_dni("1234")))

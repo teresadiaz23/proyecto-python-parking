@@ -2,8 +2,8 @@ from aplicacion.controllers.parking_controller import parking_controller
 from aplicacion.models import AbonoNoEncontrado
 from aplicacion.models import ClienteNoEncontrado
 from aplicacion.models import DatosErroneos
-from aplicacion.services import abonado_servicio
-from aplicacion.services import admin_servicio
+from aplicacion.services.abonado_servicio import abonado_servicio
+from aplicacion.services.administrador_servicio import admin_servicio
 
 
 class ClienteAbonadoController():
