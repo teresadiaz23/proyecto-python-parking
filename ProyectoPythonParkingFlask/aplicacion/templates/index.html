@@ -3,5 +3,13 @@
 {% block contenido %}
 	    <h2 class="text-center">Bienvenido al parking de los Salesianos de Triana</h2>
 
+                <ul>
+					{%for cliente in abonados%}
+                    <li scope="row">{{cliente.nombre}}</li>
+                    <li>{{cliente.apellidos}}</li>
+
+					{%endfor%}
+                </ul>
+
 
 {% endblock %}
