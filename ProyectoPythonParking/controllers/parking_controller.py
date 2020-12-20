@@ -83,18 +83,6 @@ class ParkingController():
             raise MesIncorrecto
 
 
-        # try:
-        #
-        #     for k, v in meses.items():
-        #         if(k == mes):
-        #             return v
-        #     if(mes not in meses.values()):
-        #         raise MesIncorrecto
-        #
-        # except MesIncorrecto:
-        #     print("\nEse mes no existe")
+
 
 parking_controller = ParkingController()
-#parking_controller.imprimir_ticket(ticket_servicio.findByPin(111111))
-#parking_controller.imprimir_abono(abono_servicio.findByPin(111))
-#parking_controller.imprimir_abono_dni("1234", 111)

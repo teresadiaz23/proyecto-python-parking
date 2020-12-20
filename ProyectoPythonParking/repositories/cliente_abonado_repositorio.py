@@ -18,10 +18,7 @@ class ClienteAbonadoRepositorio():
 
     def save(self, cliente):
         self.lista_clientes.append(cliente)
-        filename = './datos/clientes'
-        outfile = open(filename, 'wb')
-        pickle.dump(self.lista_clientes, outfile)
-        outfile.close()
+
 
     def find_all(self):
         return self.lista_clientes
@@ -45,23 +42,9 @@ lista = [
     ClienteAbonado("12345678D", "Miguel", "Campos", "287698", "miguel@email.com", Turismo("3876KKK"), "anual", 30)
 ]
 
-filename = './datos/clientes'
-outfile = open(filename, 'wb')
-
-pickle.dump(lista, outfile)
-outfile.close()
-
-infile = open(filename, 'rb')
-lista_clientes = pickle.load(infile)
-infile.close()
 
 
-cliente_abonado_repositorio = ClienteAbonadoRepositorio(lista_clientes)
+cliente_abonado_repositorio = ClienteAbonadoRepositorio(lista)
 
-# for cliente in cliente_abonado_repositorio.findAll():
-#     print(cliente)
 
-# for c in cliente_abonado_repositorio.findAll():
-#     print(c)
-#print(cliente_abonado_repositorio.findByDni("1234"))
 

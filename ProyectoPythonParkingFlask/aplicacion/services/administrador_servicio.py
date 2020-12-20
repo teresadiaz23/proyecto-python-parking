@@ -100,8 +100,6 @@ class AdminServicio():
             abono_servicio.save(abono)
             plaza.ClienteId = cliente.id
             plaza_servicio.save(plaza)
-            # plaza.cliente = cliente
-            #parking_servicio.find_all().dinero_abonos.append(abono.precio)
             parking_servicio.find_all().dinero_abonos += abono.precio
             parking_servicio.edit(parking_servicio.find_all())
 
@@ -120,28 +118,24 @@ class AdminServicio():
             if(tipo_abono.lower() == "mensual"):
                 abono.fecha_cancelacion = abono.fecha_cancelacion + relativedelta(months=1)
                 abono.tipo = tipo_abono
-                #cliente.abono = tipo_abono
                 abono.precio = 25
                 modificado = True
 
             elif(tipo_abono.lower() == "trimestral"):
                 abono.fecha_cancelacion = abono.fecha_cancelacion + relativedelta(months=3)
                 abono.tipo = tipo_abono
-                #cliente.abono = tipo_abono
                 abono.precio = 70
                 modificado = True
 
             elif(tipo_abono.lower() == "semestral"):
                 abono.fecha_cancelacion = abono.fecha_cancelacion + relativedelta(months=6)
                 abono.tipo = tipo_abono
-                #cliente.abono = tipo_abono
                 abono.precio = 130
                 modificado = True
 
             elif(tipo_abono.lower() == "anual"):
                 abono.fecha_cancelacion = abono.fecha_cancelacion + relativedelta(years=1)
                 abono.tipo = tipo_abono
-                #cliente.abono = tipo_abono
                 abono.precio = 200
                 abono_servicio.edit(abono)
                 modificado = True
@@ -228,14 +222,5 @@ class AdminServicio():
 
 
 admin_servicio = AdminServicio()
-# print(admin_servicio.comprobar_password("1234"))
-# print(admin_servicio.facturacion(datetime(2020, 10, 10), datetime(2020, 12, 14)))
-# print(admin_servicio.consulta_cobro_abonados())
-# print(admin_servicio.alta_abono("1235", "Teresa", "Diaz", "14141241", "teresa@email.com", "1234FFF", "turismo", "mensual"))
-# print(admin_servicio.renovacion_abono("1234", 111, "anual"))
-# print(admin_servicio.borrar_abono("1234", 111))
-# print(admin_servicio.caducidad_abonos_mes("12"))
-# print(admin_servicio.caducidad_abonos_10_dias())
-# for abono in abono_servicio.findAll():
-#     print(abono)
+
 

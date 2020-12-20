@@ -11,7 +11,6 @@ class Parking(db.Model):
     num_plazas = Column(Integer)
     dinero_tickets = Column(Float)
     dinero_abonos = Column(Float)
-    #PlazaId = Column(Integer, ForeignKey('plaza.id'), nullable=False)
     plazas = relationship("Plaza", backref="Parking")
 
 #     def __init__(self, num_plazas, lista_plazas=[], dinero_tickets=[], dinero_abonos=[]):
@@ -51,21 +50,7 @@ class Parking(db.Model):
 #     @dinero_abonos.setter
 #     def dinero_abonos(self, dinero_abonos):
 #         self.__dinero_abonos = dinero_abonos
-#
-#
-# dinero_tickets = []
-# if(len(ticket_servicio.find_all()) > 0):
-#     for ticket in ticket_servicio.find_all():
-#         dinero_tickets.append(ticket.coste)
-#
-#
-# dinero_abonos = []
-# if(len(abono_servicio.find_all()) > 0):
-#     for abono in abono_servicio.find_all():
-#         dinero_abonos.append(abono.precio)
-#
-#
-#parking = Parking(60,  dinero_tickets=dinero_tickets, dinero_abonos=dinero_abonos)
+
 
 
 

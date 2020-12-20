@@ -72,11 +72,4 @@ class ClienteServicio():
 
 
 cliente_servicio = ClienteServicio()
-# cliente_servicio.depositar_vehiculo("1234", "turismo")
-# print(parking_servicio.findAll().lista_plazas[0])
-# print(cliente_servicio.retirar_vehiculo("1234BBB", 6, 111111))
-# print(parking_servicio.findAll().lista_plazas[0])
-# cliente_servicio.depositar_vehiculo("1234", "motocicleta")
-# cliente_servicio.depositar_vehiculo("1234", "movilidad reducida")
-# for plaza in parking_servicio.findAll().lista_plazas:
-#     print(plaza)
+

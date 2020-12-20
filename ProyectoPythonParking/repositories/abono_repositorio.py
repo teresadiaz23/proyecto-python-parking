@@ -22,10 +22,7 @@ class AbonoRepositorio():
 
     def save(self, abono):
         self.lista_abonos.append(abono)
-        filename = './datos/abonos'
-        outfile = open(filename, 'wb')
-        pickle.dump(self.lista_abonos, outfile)
-        outfile.close()
+
 
     def find_all(self):
         return self.lista_abonos
@@ -55,20 +52,10 @@ abono4 = Abono(444, "anual", datetime.now(), datetime.now() + relativedelta(year
 
 lista_abonos = [abono1, abono2, abono3, abono4]
 
-filename = './datos/abonos'
-outfile = open(filename, 'wb')
 
-pickle.dump(lista_abonos, outfile)
-outfile.close()
+abono_repositorio = AbonoRepositorio(lista_abonos)
 
-infile = open(filename, 'rb')
-lista = pickle.load(infile)
-infile.close()
 
-abono_repositorio = AbonoRepositorio(lista)
-
-# for abono in abono_repositorio.findAll():
-#     print(abono)
 
 
 

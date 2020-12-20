@@ -94,7 +94,3 @@ class AbonadoServicio():
 
 abonado_servicio = AbonadoServicio(cliente_abonado_repositorio)
 
-# print(abonado_servicio.depositar_abonados("1234BBB", "1234"))
-# print(abonado_servicio.retirar_abonados("1234BBB", 3, 111))
-# print(abonado_servicio.obtener_abono("1234", 111))
-# print(abonado_servicio.obtener_datos_personales("1234", 111))
