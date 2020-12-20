@@ -1,4 +1,6 @@
+from repositories.cliente_abonado_repositorio import cliente_abonado_repositorio
 from repositories.parking_repositorio import parking_repositorio
+
 
 class ParkingServicio():
     def __init__(self, repo):
@@ -15,14 +17,14 @@ class ParkingServicio():
     def save(self, parking):
         self.repositorio.save(parking)
 
-    def findAll(self):
-        return self.repositorio.findAll()
+    def find_all(self):
+        return self.repositorio.find_all()
 
-    def findPlazaByCliente(self, cliente):
-        return self.repositorio.findPlazaByCliente(cliente)
+    def find_plaza_by_cliente(self, cliente):
+        return self.repositorio.find_plaza_by_cliente(cliente)
 
-    def findPlazaById(self, id):
-        return self.repositorio.findPlazaById(id)
+    def find_plaza_by_id(self, id):
+        return self.repositorio.find_plaza_by_id(id)
 
     def plazas_libres_turismo(self):
         libres = []
@@ -56,3 +58,4 @@ class ParkingServicio():
 
 
 parking_servicio = ParkingServicio(parking_repositorio)
+

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Cliente Depositar Vehículo{% endblock %}
+{% block contenido %}
+	    <h2>Depositar vehículo</h2>
+
+	<p>Actualmente hay {{libres_t}} plazas de turismos,
+              {{libres_m}} plazas de motocicletas y
+              {{libres_mvr}} plazas de movilidad reducida libres</p>
+
+	<form action={{url_for("depositar_cliente")}} method="post" class="col-7">
+	  <div class="form-group">
+		<label for="matricula">Introduce la matrícula de su vehículo:</label>
+		<input type="text" class="form-control" name="matricula" id="matricula">
+	  </div>
+	  <div class="form-group">
+		<label for="tipo">Introduce el tipo de su vehículo:</label>
+		  <select class="custom-select my-1 mr-sm-2" name="tipo" id="tipo">
+			  <option selected>Elegir...</option>
+  			<option value="turismo">Turismo</option>
+  			<option value="motocicleta">Motocicleta</option>
+  			<option value="movilidad reducida">Movilidad reducida</option>
+  		</select>
+	  </div>
+
+
+	  <button type="submit" class="btn btn-primary">Enviar</button>
+	</form>
+
+{% endblock %}

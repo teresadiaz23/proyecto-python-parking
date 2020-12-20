@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}Estado Parking{% endblock %}
+{% block contenido %}
+	    <h2 class="mb-4">Estado parking</h2>
+
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">ID Plaza</th>
+              <th scope="col">Vehículo</th>
+              <th scope="col">Estado</th>
+
+            </tr>
+          </thead>
+          <tbody>
+          {%for plaza in lista_plazas%}
+                <tr>
+                    {% if plaza.ocupada == False and plaza.cliente == None %}
+                        <th scope="row">{{plaza.id}}</th>
+                        <td>{{plaza.tipo_vehiculo.capitalize()}}</td>
+                         <td>Libre</td>
+
+                    {% elif plaza.ocupada == True and plaza.cliente == None %}
+                        <th scope="row">{{plaza.id}}</th>
+                        <td>{{plaza.tipo_vehiculo.capitalize()}}</td>
+                         <td>Ocupada</td>
+
+                    {% elif plaza.ocupada == False and plaza.cliente != None %}
+                        <th scope="row">{{plaza.id}}</th>
+                        <td>{{plaza.tipo_vehiculo.capitalize()}}</td>
+                         <td>Abono Libre</td>
+
+                    {% elif plaza.ocupada == True and plaza.cliente != None %}
+                        <th scope="row">{{plaza.id}}</th>
+                        <td>{{plaza.tipo_vehiculo.capitalize()}}</td>
+                         <td>Abono Ocupada</td>
+                    {%endif%}
+                </tr>
+                {%endfor%}
+
+          </tbody>
+        </table>
+
+<!-- # for plaza in lista_plazas:-->
+<!--        #     if(plaza.ocupada == False and plaza.cliente == None):-->
+<!--        #         print(f"ID: {plaza.id} -> Vehículo: {plaza.tipo_vehiculo} -> Estado: Libre")-->
+<!--        #-->
+<!--        #     elif(plaza.ocupada == True and plaza.cliente == None):-->
+<!--        #         print(f"ID: {plaza.id} -> Vehículo: {plaza.tipo_vehiculo} -> Estado: Ocupada")-->
+<!--        #-->
+<!--        #     elif(plaza.ocupada == False and plaza.cliente != None):-->
+<!--        #         print(f"ID: {plaza.id} -> Vehículo: {plaza.tipo_vehiculo} -> Estado: Abono Libre")-->
+<!--        #-->
+<!--        #     elif(plaza.ocupada == True and plaza.cliente != None):-->
+<!--        #         print(f"ID: {plaza.id} -> Vehículo: {plaza.tipo_vehiculo} -> Estado: Abono Ocupada")-->
+{% endblock %}

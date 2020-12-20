@@ -19,19 +19,26 @@ class TicketRepositorio():
     def save(self, ticket):
         self.lista_tickets.append(ticket)
 
-    def findAll(self):
+
+    def find_all(self):
         return self.lista_tickets
 
-    def findByPin(self, pin):
+    def find_by_pin(self, pin):
         for ticket in self.lista_tickets:
             if(ticket.pin == pin):
                 return ticket
 
-    def findByMatricula(self, matricula):
+    def find_by_matricula(self, matricula):
         for ticket in self.lista_tickets:
             if(ticket.matricula == matricula):
                 return ticket
 
 
-lista_tickets = [Ticket("1234BBB", datetime(2020,12,10,15,30), 6, 111111, datetime(2020,12,10,17,30), 5)]
+lista_tickets = [
+    Ticket("1234BBB", datetime(2020, 12, 10, 15, 30), 6, 111111, datetime(2020, 12, 10, 17, 30), 5),
+    Ticket("1234JJJ", datetime(2020, 12, 12, 15, 30), 6, 111111, datetime(2020, 12, 12, 17, 30), 5.50),
+    Ticket("1234FFF", datetime(2020, 12, 14, 15, 30), 6, 111111, datetime(2020, 12, 14, 17, 30), 6)
+]
+
+
 ticket_repositorio = TicketRepositorio(lista_tickets)

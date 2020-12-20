@@ -1,0 +1,2 @@
+class DatosErroneos(Exception):
+    pass

@@ -45,9 +45,9 @@ class ParkingController():
 
 
     def imprimir_abono_dni(self, dni, pin):
-        cliente = abonado_servicio.findByDni(dni)
-        abono = abono_servicio.findByCliente(cliente)
-        abono2 = abono_servicio.findByPin(pin)
+        cliente = abonado_servicio.find_by_dni(dni)
+        abono = abono_servicio.find_by_cliente(cliente)
+        abono2 = abono_servicio.find_by_pin(pin)
 
         try:
 
@@ -83,18 +83,6 @@ class ParkingController():
             raise MesIncorrecto
 
 
-        # try:
-        #
-        #     for k, v in meses.items():
-        #         if(k == mes):
-        #             return v
-        #     if(mes not in meses.values()):
-        #         raise MesIncorrecto
-        #
-        # except MesIncorrecto:
-        #     print("\nEse mes no existe")
+
 
 parking_controller = ParkingController()
-#parking_controller.imprimir_ticket(ticket_servicio.findByPin(111111))
-#parking_controller.imprimir_abono(abono_servicio.findByPin(111))
-#parking_controller.imprimir_abono_dni("1234", 111)

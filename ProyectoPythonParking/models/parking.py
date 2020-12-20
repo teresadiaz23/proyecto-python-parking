@@ -44,14 +44,14 @@ class Parking():
 
 
 dinero_tickets = []
-if(len(ticket_servicio.findAll()) > 0):
-    for ticket in ticket_servicio.findAll():
+if(len(ticket_servicio.find_all()) > 0):
+    for ticket in ticket_servicio.find_all():
         dinero_tickets.append(ticket.coste)
 
 
 dinero_abonos = []
-if(len(abono_servicio.findAll()) > 0):
-    for abono in abono_servicio.findAll():
+if(len(abono_servicio.find_all()) > 0):
+    for abono in abono_servicio.find_all():
         dinero_abonos.append(abono.precio)
 
 

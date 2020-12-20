@@ -1,5 +1,6 @@
 from models.cliente_abonado import ClienteAbonado
 from models.vehiculo import Turismo, Motocicleta, MovilidadReducida
+import pickle
 
 
 class ClienteAbonadoRepositorio():
@@ -18,15 +19,16 @@ class ClienteAbonadoRepositorio():
     def save(self, cliente):
         self.lista_clientes.append(cliente)
 
-    def findAll(self):
+
+    def find_all(self):
         return self.lista_clientes
 
-    def findByDni(self, dni):
+    def find_by_dni(self, dni):
         for cliente in self.lista_clientes:
             if(cliente.dni == dni):
                 return cliente
 
-    def findByMatricula(self, matricula):
+    def find_by_matricula(self, matricula):
         for cliente in self.lista_clientes:
             if(cliente.vehiculo.matricula == matricula):
                 return cliente
@@ -40,10 +42,9 @@ lista = [
     ClienteAbonado("12345678D", "Miguel", "Campos", "287698", "miguel@email.com", Turismo("3876KKK"), "anual", 30)
 ]
 
+
+
 cliente_abonado_repositorio = ClienteAbonadoRepositorio(lista)
 
 
-# for c in cliente_abonado_repositorio.findAll():
-#     print(c)
-#print(cliente_abonado_repositorio.findByDni("1234"))
 

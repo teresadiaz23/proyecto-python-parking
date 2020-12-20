@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Ticket{% endblock %}
+{% block contenido %}
+	    <h2>Puede aparcar su coche en la plaza asignada</h2>
+<div class="card col-6">
+  <div class="card-header">Ticket</div>
+  <div class="card-body">
+	  <table>
+		  <tr>
+			<td class="col-2">Matricula</td>
+			<td>{{ticket.matricula}}</td>
+		</tr>
+		<tr>
+			<td class="col-2">Fecha depósito</td>
+			<td>{{ticket.fecha_deposito.day}}/{{ticket.fecha_deposito.month}}/{{ticket.fecha_deposito.year}}</td>
+		</tr>
+		<tr>
+			<td class="col-2">Hora</td>
+			<td>{{ticket.fecha_deposito.hour}}:{{ticket.fecha_deposito.minute}}:{{ticket.fecha_deposito.second}}</td>
+		</tr>
+		<tr>
+			<td class="col-2">Id Plaza</td>
+			<td>{{ticket.PlazaId}}</td>
+		</tr>
+		  <tr>
+			  <td class="col-2">Pin</td>
+			  <td>{{ticket.pin}}</td>
+		  </tr>
+	  </table>
+
+  </div>
+
+</div>
+
+
+
+
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Abonos Caducan Mes{% endblock %}
+{% block contenido %}
+{% if cant > 0%}
+	    <h2>Abonos que caducan en {{mes_letra}}</h2>
+
+<table class="table table-striped">
+          <thead>
+            <tr>
+                <th scope="col">ID Abono</th>
+              <th scope="col">Tipo</th>
+              <th scope="col">Fecha Activacion</th>
+                <th scope="col">Fecha Caducidad</th>
+              <th scope="col">Precio</th>
+
+            </tr>
+          </thead>
+          <tbody>
+          {%for abono in abonos%}
+                <tr>
+                    <th scope="row">{{abono.id}}</th>
+                    <td>{{abono.tipo.capitalize()}}</td>
+                    <td>{{abono.fecha_activacion.day}}/{{abono.fecha_activacion.month}}/{{abono.fecha_activacion.year}}</td>
+                    <td>{{abono.fecha_cancelacion.day}}/{{abono.fecha_cancelacion.month}}/{{abono.fecha_cancelacion.year}}</td>
+
+                    <td>{{abono.precio}} €</td>
+                </tr>
+          {%endfor%}
+
+          </tbody>
+
+        </table>
+{% else %}
+    <h2 class="text-danger">No hay abonos que caduquen en el {{mes_letra}}</h2>
+{%endif%}
+
+
+{% endblock %}
