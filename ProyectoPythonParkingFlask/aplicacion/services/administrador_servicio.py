@@ -26,8 +26,9 @@ class AdminServicio():
         coste = []
 
         for ticket in ticket_servicio.find_all():
-            if(ticket.fecha_salida >= fecha1 and ticket.fecha_salida <= fecha2):
-                coste.append(ticket.coste)
+            if(ticket.fecha_salida != None):
+                if(ticket.fecha_salida >= fecha1 and ticket.fecha_salida <= fecha2):
+                    coste.append(ticket.coste)
 
         if(len(coste) > 0):
             for c in coste:
@@ -38,9 +39,9 @@ class AdminServicio():
 
     def consulta_cobro_abonados(self):
         total = 0
-        if(len(parking_servicio.find_all().dinero_abonos) > 0):
-            for d in parking_servicio.find_all().dinero_abonos:
-                total += d
+        if(parking_servicio.find_all().dinero_abonos > 0):
+
+                total += parking_servicio.find_all().dinero_abonos
 
         return round(total, 2)
 
@@ -102,6 +103,7 @@ class AdminServicio():
             # plaza.cliente = cliente
             #parking_servicio.find_all().dinero_abonos.append(abono.precio)
             parking_servicio.find_all().dinero_abonos += abono.precio
+            parking_servicio.edit(parking_servicio.find_all())
 
         else:
             raise DatosErroneos
@@ -152,6 +154,7 @@ class AdminServicio():
             abono_servicio.edit(abono)
 
         parking_servicio.find_all().dinero_abonos += abono.precio
+        parking_servicio.edit(parking_servicio.find_all())
         return modificado
 
     def modificar_datos_abono(self, dni, pin, nombre, apellidos, num_tarjeta, email):

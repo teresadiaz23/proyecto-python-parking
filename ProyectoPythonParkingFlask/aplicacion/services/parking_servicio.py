@@ -15,6 +15,9 @@ class ParkingServicio():
     def save(self, parking):
         self.repositorio.save(parking)
 
+    def edit(self, parking):
+        self.repositorio.save(parking)
+
     def find_all(self):
         return self.repositorio.find_all()
 

@@ -2,3 +2,4 @@ Flask
 Flask-Script
 Flask-Bootstrap4
 Flask-Sqlalchemy
+python-dateutil

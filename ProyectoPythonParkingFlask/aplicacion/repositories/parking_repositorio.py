@@ -1,4 +1,5 @@
 #from aplicacion.models.parking import parking
+from aplicacion.app import db
 from aplicacion.models.parking import Parking
 from aplicacion.models.plaza import Plaza
 from aplicacion.repositories.plaza_repositorio import plaza_repositorio
@@ -15,6 +16,10 @@ class ParkingRepositorio():
     # @parking.setter
     # def parking(self, parking):
     #      self.__parking = parking
+
+    def save(self, abono):
+        db.session.add(abono)
+        db.session.commit()
 
     def find_all(self):
         parking = Parking.query.first()

@@ -5,9 +5,9 @@
 <table class="table table-striped">
           <thead>
             <tr>
-                <th scope="col">Nº</th>
+                <th scope="col">ID Abono</th>
               <th scope="col">Tipo</th>
-              <th scope="col">Id Plaza</th>
+<!--              <th scope="col">Id Plaza</th>-->
               <th scope="col">Fecha Activacion</th>
                 <th scope="col">Fecha Caducidad</th>
               <th scope="col">Precio</th>
@@ -19,7 +19,7 @@
                 <tr>
                     <th scope="row">{{abono.id}}</th>
                     <td>{{abono.tipo.capitalize()}}</td>
-                    <td>{{abono.cliente_abonado.id_plaza}}</td>
+<!--                    <td>{{abono.cliente_abonado.id_plaza}}</td>-->
                     <td>{{abono.fecha_activacion.day}}/{{abono.fecha_activacion.month}}/{{abono.fecha_activacion.year}}</td>
                     <td>{{abono.fecha_cancelacion.day}}/{{abono.fecha_cancelacion.month}}/{{abono.fecha_cancelacion.year}}</td>
 
@@ -28,7 +28,7 @@
                 {%endfor%}
 
           </tbody>
-            <tfoot>Total facturado con los abonos: {{total}}</tfoot>
+            <tfoot>Total facturado con los abonos: <span class="font-weight-bold">{{total}} €</span></tfoot>
         </table>
 
 

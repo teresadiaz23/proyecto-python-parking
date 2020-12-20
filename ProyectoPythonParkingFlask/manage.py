@@ -76,8 +76,8 @@ def add_data_tables():
         db.session.commit()
 
     abonos=[
-        {"pin":111, "tipo":"mensual", "fecha_activacion":datetime.now(),
-         "fecha_cancelacion":datetime.now() + relativedelta(months=1), "precio":25, "ClienteId":1},
+        {"pin":111, "tipo":"mensual", "fecha_activacion":datetime(2020, 12, 1),
+         "fecha_cancelacion":datetime(2020, 12, 1) + relativedelta(months=1), "precio":25, "ClienteId":1},
         {"pin":222, "tipo":"trimestral", "fecha_activacion":datetime.now(),
          "fecha_cancelacion":datetime.now() + relativedelta(months=3), "precio":70, "ClienteId":2},
         {"pin":333, "tipo":"semestral", "fecha_activacion":datetime.now(),

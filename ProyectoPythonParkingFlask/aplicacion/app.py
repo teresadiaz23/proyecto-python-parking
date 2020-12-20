@@ -255,20 +255,20 @@ def modificar_datos_abono():
 @app.route('/abonado/abono/renovar/', methods=["get", "post"])
 def renovar_abono():
     if request.method == 'POST':
-        try:
-            dni = request.form.get("dni")
-            pin = int(request.form.get("pin"))
-            tipo_abono = request.form.get("tipo_abono")
+        #try:
+        dni = request.form.get("dni")
+        pin = int(request.form.get("pin"))
+        tipo_abono = request.form.get("tipo_abono")
 
-            if(admin_servicio.renovacion_abono(dni, pin, tipo_abono)):
+        if(admin_servicio.renovacion_abono(dni, pin, tipo_abono)):
                     #print("\nSu abono se ha renovado correctamente")
-                abono = parking_controller.imprimir_abono_dni(dni, pin)
-                plaza = plaza_servicio.find_by_cliente(abono.cliente_abonado)
-                return render_template("./abonado/abono.html", dni=dni, pin=pin, tipo_abono=tipo_abono, abono=abono,
+            abono = parking_controller.imprimir_abono_dni(dni, pin)
+            plaza = plaza_servicio.find_by_cliente(abono.cliente_abonado)
+            return render_template("./abonado/abono.html", dni=dni, pin=pin, tipo_abono=tipo_abono, abono=abono,
                                            plaza=plaza, mensaje="Su abono se ha renovado correctamente")
 
-        except:
-            return render_template("./errores/error.html", error="No existe ningún abono con esos datos")
+        #except:
+         #   return render_template("./errores/error.html", error="No existe ningún abono con esos datos")
             #print("\nNo existe ningún abono con esos datos")
         # except:
         #     return render_template("./errores/error.html", error="No se han podido modificar los datos")
@@ -338,6 +338,7 @@ def consulta_abonados():
         if(len(abono_servicio.find_all()) > 0):
             abonos = abono_servicio.find_all()
             total = admin_servicio.consulta_cobro_abonados()
+
         #     for abono in abono_servicio.find_all():
         #         print(f"\nAbono {i}\nTipo: {abono.tipo}\nId Plaza: {abono.cliente_abonado.id_plaza}\n"
         #               f"Fecha Activacion: {abono.fecha_activacion.day}/{abono.fecha_activacion.month}/{abono.fecha_activacion.year}\n"

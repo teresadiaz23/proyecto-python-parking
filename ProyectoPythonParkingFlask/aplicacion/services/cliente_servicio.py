@@ -59,7 +59,8 @@ class ClienteServicio():
             ticket.fecha_salida = hoy
             ticket.coste = total
             ticket_servicio.edit(ticket)
-            parking_servicio.find_all().dinero_tickets+=total
+            parking_servicio.find_all().dinero_tickets += total
+            parking_servicio.edit(parking_servicio.find_all())
 
             plaza.ocupada = False
             plaza_servicio.edit(plaza)
