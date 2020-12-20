@@ -280,16 +280,16 @@ def renovar_abono():
 @app.route('/abonado/abono/borrar/', methods=["get", "post"])
 def borrar_abono():
     if request.method == 'POST':
-        #try:
-        dni = request.form.get("dni")
-        pin = int(request.form.get("pin"))
+        try:
+            dni = request.form.get("dni")
+            pin = int(request.form.get("pin"))
 
-        if(admin_servicio.borrar_abono(dni, pin)):
-                #print("\nEl abono se ha borrado correctamente")
-            return render_template("./abonado/confirmacion.html", dni=dni, pin=pin,
+            if(admin_servicio.borrar_abono(dni, pin)):
+                    #print("\nEl abono se ha borrado correctamente")
+                return render_template("./abonado/confirmacion.html", dni=dni, pin=pin,
                                        mensaje="El abono se ha borrado correctamente")
-        #except:
-         #   return render_template("./errores/error.html", error="No existe ningún abono con esos datos")
+        except:
+               return render_template("./errores/error.html", error="No existe ningún abono con esos datos")
             #print("\nNo existe ningún abono con esos datos")
     else:
         return render_template("./abonado/abonado_borrar_abono.html")
@@ -297,11 +297,16 @@ def borrar_abono():
 
 #Rutas adminstrador
 
-@app.route('/admin/')
+@app.route('/admin/', methods=["get", "post"])
 def admin_index():
-
-        return render_template("./administrador/admin_index.html")
-
+    if request.method == 'POST':
+        password = request.form.get("password")
+        if(admin_servicio.comprobar_password(password)):
+            return render_template("./administrador/admin_index.html", password=password)
+        else:
+            return render_template("./errores/error.html", error="Acceso denegado")
+    else:
+        return render_template("./administrador/password.html")
 
 @app.route('/admin/estado_parking/')
 def estado_parking():
