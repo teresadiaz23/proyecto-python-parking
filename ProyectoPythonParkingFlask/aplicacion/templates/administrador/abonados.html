@@ -17,7 +17,7 @@
           <tbody>
           {%for abono in abonos%}
                 <tr>
-                    <th scope="row">{{index}}</th>
+                    <th scope="row">{{abono.id}}</th>
                     <td>{{abono.tipo.capitalize()}}</td>
                     <td>{{abono.cliente_abonado.id_plaza}}</td>
                     <td>{{abono.fecha_activacion.day}}/{{abono.fecha_activacion.month}}/{{abono.fecha_activacion.year}}</td>

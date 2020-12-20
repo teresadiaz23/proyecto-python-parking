@@ -1,5 +1,5 @@
 from aplicacion.app import db
-from sqlalchemy import Boolean, Column , ForeignKey
+from sqlalchemy import Boolean, Column, ForeignKey
 from sqlalchemy import DateTime, Integer, String, Text, Float
 from sqlalchemy.orm import relationship
 
@@ -10,8 +10,8 @@ class Abono(db.Model):
     id = Column(Integer, primary_key=True)
     pin = Column(Integer)
     tipo = Column(String(100))
-    fecha_activacion = Column(DateTime(10))
-    fecha_cancelacion = Column(DateTime(10))
+    fecha_activacion = Column(DateTime(20))
+    fecha_cancelacion = Column(DateTime(20))
     pin = Column(Integer)
     precio = Column(Float)
     ClienteId = Column(Integer,ForeignKey('cliente_abonado.id'), nullable=False)

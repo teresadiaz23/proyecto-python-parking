@@ -12,10 +12,12 @@ class ClienteAbonado(db.Model):
     apellidos = Column(String(10))
     num_tarjeta = Column(String(10))
     email = Column(Integer)
-    #VehiculoId = Column(Integer,ForeignKey('vehiculo.id'), nullable=False)
-    #vehiculo = relationship("Vehiculo", backref="ClienteAbonado")
+    VehiculoId = Column(Integer, ForeignKey('vehiculo.id'), nullable=False)
+    vehiculo = relationship("Vehiculo", backref="ClienteAbonado")
     #AbonoId = Column(Integer,ForeignKey('abono.id'), nullable=False)
     abono = relationship("Abono", backref="ClienteAbonado")
+    #PlazaId = Column(Integer, ForeignKey('plaza.id'), nullable=False)
+    plaza = relationship("Plaza", backref="ClienteAbonado")
 
     # def __init__(self, dni, nombre, apellidos, num_tarjeta, email, vehiculo=None, abono=None, id_plaza=0):
     #     self.__dni = dni

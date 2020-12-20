@@ -1,42 +1,55 @@
 #from aplicacion.models.cliente_abonado import ClienteAbonado
-from aplicacion.models.vehiculo import Turismo, Motocicleta, MovilidadReducida
+from aplicacion.app import db
+from aplicacion.models.cliente_abonado import ClienteAbonado
+from aplicacion.models.vehiculo import Turismo, Motocicleta, MovilidadReducida, Vehiculo
 import pickle
 
 
 class ClienteAbonadoRepositorio():
-    def __init__(self, lista_clientes):
-        #clientes=ClienteAbonado.query.all()
-        self.__lista_clientes = lista_clientes
-
-    @property
-    def lista_clientes(self):
-         return self.__lista_clientes
-
-    @lista_clientes.setter
-    def lista_clientes(self, lista_clientes):
-         self.__lista_clientes = lista_clientes
+    # def __init__(self, lista_clientes):
+    #     #clientes=ClienteAbonado.query.all()
+    #     self.__lista_clientes = lista_clientes
+    #
+    # @property
+    # def lista_clientes(self):
+    #      return self.__lista_clientes
+    #
+    # @lista_clientes.setter
+    # def lista_clientes(self, lista_clientes):
+    #      self.__lista_clientes = lista_clientes
 
 
     def save(self, cliente):
-        self.lista_clientes.append(cliente)
+        db.session.add(cliente)
+        db.session.commit()
+        #self.lista_clientes.append(cliente)
         # filename = './aplicacion/datos/clientes'
         # outfile = open(filename, 'wb')
         # pickle.dump(self.lista_clientes, outfile)
         # outfile.close()
 
     def find_all(self):
-        return self.lista_clientes
+        clientes = ClienteAbonado.query.all()
+        return clientes
+        #return self.lista_clientes
 
     def find_by_dni(self, dni):
-        for cliente in self.lista_clientes:
-            if(cliente.dni == dni):
-                return cliente
+        cliente = ClienteAbonado.query.filter_by(dni=dni).first()
+        return cliente
+        # for cliente in self.lista_clientes:
+        #     if(cliente.dni == dni):
+        #         return cliente
 
     def find_by_matricula(self, matricula):
-        for cliente in self.lista_clientes:
-            if(cliente.vehiculo.matricula == matricula):
-                return cliente
+        vehiculo = Vehiculo.query.filter_by(matricula=matricula).first()
+        cliente = ClienteAbonado.query.filter_by(vehiculo=vehiculo).first()
+        return cliente
+        # for cliente in self.lista_clientes:
+        #     if(cliente.vehiculo.matricula == matricula):
+        #         return cliente
 
+    def delete(self, cliente):
+        db.session.delete(cliente)
 
 
 # lista = [
@@ -58,7 +71,7 @@ class ClienteAbonadoRepositorio():
 
 
 # clientes=ClienteAbonado.query.all()
-cliente_abonado_repositorio = ClienteAbonadoRepositorio([])
+cliente_abonado_repositorio = ClienteAbonadoRepositorio()
 # for cliente in cliente_abonado_repositorio.find_all():
 #     print(cliente.nombre)
 

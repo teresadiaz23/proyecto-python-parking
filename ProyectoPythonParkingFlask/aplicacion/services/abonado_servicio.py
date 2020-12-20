@@ -3,6 +3,7 @@ from aplicacion.models import ClienteNoEncontrado
 from aplicacion.repositories.cliente_abonado_repositorio import cliente_abonado_repositorio
 from aplicacion.services.abono_servicio import abono_servicio
 from aplicacion.services.parking_servicio import parking_servicio
+from aplicacion.services.plaza_servicio import plaza_servicio
 
 
 class AbonadoServicio():
@@ -32,6 +33,9 @@ class AbonadoServicio():
     def find_by_matricula(self, matricula):
         return self.repositorio.find_by_matricula(matricula)
 
+    def delete(self, cliente):
+        self.repositorio.delete(cliente)
+
 
     def depositar_abonados(self, matricula, dni):
         depositado = False
@@ -42,6 +46,7 @@ class AbonadoServicio():
             depositado = True
             plaza = parking_servicio.find_plaza_by_cliente(cliente)
             plaza.ocupada = True
+            plaza_servicio.edit(plaza)
         if(not depositado):
             raise ClienteNoEncontrado
 
@@ -56,6 +61,7 @@ class AbonadoServicio():
         if(cliente != None and abono != None):
             if(abono.cliente_abonado == cliente and plaza.ocupada):
                 plaza.ocupada = False
+                plaza_servicio.edit(plaza)
                 retirado = True
 
         else:

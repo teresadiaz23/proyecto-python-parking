@@ -33,9 +33,9 @@ class ClienteServicio():
                 depositado = True
 
         if(depositado):
-            pin = randint(111111,999999)
+            pin = randint(111111, 999999)
 
-            ticket = Ticket(matricula, datetime.now(), plaza_asignada.id, pin)
+            ticket = Ticket(matricula=matricula, fecha_deposito=datetime.now(), PlazaId=plaza_asignada.id, pin=pin)
             ticket_servicio.save(ticket)
 
 
@@ -50,7 +50,7 @@ class ClienteServicio():
         plaza = plaza_servicio.find_by_id(id)
         total = -1
 
-        if(ticket != None and ticket == ticket2 and plaza != None):
+        if(ticket != None and ticket2 != None and plaza != None):
             hoy = datetime.now()
             tiempo = hoy - ticket.fecha_deposito
             tiempo = floor(tiempo.total_seconds()/60)
@@ -59,9 +59,10 @@ class ClienteServicio():
             ticket.fecha_salida = hoy
             ticket.coste = total
             ticket_servicio.edit(ticket)
-            parking_servicio.find_all().dinero_tickets.append(total)
+            parking_servicio.find_all().dinero_tickets+=total
 
             plaza.ocupada = False
+            plaza_servicio.edit(plaza)
 
         if(total == -1):
             raise DatosErroneos
