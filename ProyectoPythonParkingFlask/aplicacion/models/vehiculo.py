@@ -1,56 +1,76 @@
-class Vehiculo():
-    def __init__(self, matricula):
-        self.__matricula = matricula
+from aplicacion.app import db
+from sqlalchemy import Boolean, Column, ForeignKey
+from sqlalchemy import DateTime, Integer, String, Text, Float
+from sqlalchemy.orm import relationship
 
-    @property
-    def matricula(self):
-        return self.__matricula
+class Vehiculo(db.Model):
+    __tablename__ = 'vehiculo'
+    id = Column(Integer, primary_key=True)
+    tipo_vehiculo = Column(String(32), nullable=False)
+    matricula = Column(String(7))
+    tarifa = Column(Float)
+    cliente = relationship("ClienteAbonado", backref="Vehiculo")
+    __mapper_args__ = {'polymorphic_on': tipo_vehiculo}
 
-    @matricula.setter
-    def matricula(self, matricula):
-        self.__matricula = matricula
+    # def __init__(self, matricula):
+    #     self.__matricula = matricula
+    #
+    # @property
+    # def matricula(self):
+    #     return self.__matricula
+    #
+    # @matricula.setter
+    # def matricula(self, matricula):
+    #     self.__matricula = matricula
 
 
 
 class Turismo(Vehiculo):
-    def __init__(self, matricula, tarifa=0.12):
-        super().__init__(matricula)
-        self.__tarifa = tarifa
+    __mapper_args__ = {'polymorphic_identity': 'turismo'}
 
-    @property
-    def tarifa(self):
-        return self.__tarifa
-
-    @tarifa.setter
-    def tarifa(self, tarifa):
-        self.__tarifa = tarifa
+    # def __init__(self, matricula, tarifa=0.12):
+    #     super().__init__(matricula)
+    #     self.__tarifa = tarifa
+    #
+    # @property
+    # def tarifa(self):
+    #     return self.__tarifa
+    #
+    # @tarifa.setter
+    # def tarifa(self, tarifa):
+    #     self.__tarifa = tarifa
 
 
 class Motocicleta(Vehiculo):
-    def __init__(self, matricula, tarifa=0.08):
-        super().__init__(matricula)
-        self.__tarifa = tarifa
+    __mapper_args__ = {'polymorphic_identity': 'motocicleta'}
 
-    @property
-    def tarifa(self):
-        return self.__tarifa
-
-    @tarifa.setter
-    def tarifa(self, tarifa):
-        self.__tarifa = tarifa
+    # def __init__(self, matricula, tarifa=0.08):
+    #     super().__init__(matricula)
+    #     self.__tarifa = tarifa
+    #
+    # @property
+    # def tarifa(self):
+    #     return self.__tarifa
+    #
+    # @tarifa.setter
+    # def tarifa(self, tarifa):
+    #     self.__tarifa = tarifa
 
 
 class MovilidadReducida(Vehiculo):
-    def __init__(self, matricula, tarifa=0.10):
-        super().__init__(matricula)
-        self.__tarifa = tarifa
+    __mapper_args__ = {'polymorphic_identity': 'movilidad_reducida'}
 
-    @property
-    def tarifa(self):
-        return self.__tarifa
 
-    @tarifa.setter
-    def tarifa(self, tarifa):
-        self.__tarifa = tarifa
+    # def __init__(self, matricula, tarifa=0.10):
+    #     super().__init__(matricula)
+    #     self.__tarifa = tarifa
+    #
+    # @property
+    # def tarifa(self):
+    #     return self.__tarifa
+    #
+    # @tarifa.setter
+    # def tarifa(self, tarifa):
+    #     self.__tarifa = tarifa
 
 

@@ -1,59 +1,74 @@
-class Ticket():
-    def __init__(self, matricula, fecha_deposito, id_plaza, pin, fecha_salida=None, coste=0):
-        self.__matricula = matricula
-        self.__fecha_deposito = fecha_deposito
-        self.__id_plaza = id_plaza
-        self.__pin = pin
-        self.__fecha_salida = fecha_salida
-        self.__coste = coste
+from aplicacion.app import db
+from sqlalchemy import Boolean, Column, ForeignKey
+from sqlalchemy import DateTime, Integer, String, Text, Float
+from sqlalchemy.orm import relationship
 
-    @property
-    def matricula(self):
-        return self.__matricula
+class Ticket(db.Model):
+    __tablename__ = 'ticket'
+    id = Column(Integer, primary_key=True)
+    matricula = Column(String(7))
+    fecha_deposito = Column(DateTime(20))
+    pin = Column(Integer)
+    fecha_salida = Column(DateTime(20))
+    coste = Column(Float)
+    PlazaId = Column(Integer, ForeignKey('plaza.id'), nullable=False)
+    plaza = relationship("Plaza", backref="Ticket")
 
-    @matricula.setter
-    def matricula(self, matricula):
-        self.__matricula = matricula
-
-    @property
-    def fecha_deposito(self):
-        return self.__fecha_deposito
-
-    @fecha_deposito.setter
-    def fecha_deposito(self, fecha_deposito):
-        self.__fecha_deposito = fecha_deposito
-
-    @property
-    def id_plaza(self):
-        return self.__id_plaza
-
-    @id_plaza.setter
-    def id_plaza(self, id_plaza):
-        self.__id_plaza = id_plaza
-
-    @property
-    def pin(self):
-        return self.__pin
-
-    @pin.setter
-    def pin(self, pin):
-        self.__pin = pin
-
-    @property
-    def fecha_salida(self):
-        return self.__fecha_salida
-
-    @fecha_salida.setter
-    def fecha_salida(self, fecha_salida):
-        self.__fecha_salida = fecha_salida
-
-    @property
-    def coste(self):
-        return self.__coste
-
-    @coste.setter
-    def coste(self, coste):
-        self.__coste = coste
+    # def __init__(self, matricula, fecha_deposito, id_plaza, pin, fecha_salida=None, coste=0):
+    #     self.__matricula = matricula
+    #     self.__fecha_deposito = fecha_deposito
+    #     self.__id_plaza = id_plaza
+    #     self.__pin = pin
+    #     self.__fecha_salida = fecha_salida
+    #     self.__coste = coste
+    #
+    # @property
+    # def matricula(self):
+    #     return self.__matricula
+    #
+    # @matricula.setter
+    # def matricula(self, matricula):
+    #     self.__matricula = matricula
+    #
+    # @property
+    # def fecha_deposito(self):
+    #     return self.__fecha_deposito
+    #
+    # @fecha_deposito.setter
+    # def fecha_deposito(self, fecha_deposito):
+    #     self.__fecha_deposito = fecha_deposito
+    #
+    # @property
+    # def id_plaza(self):
+    #     return self.__id_plaza
+    #
+    # @id_plaza.setter
+    # def id_plaza(self, id_plaza):
+    #     self.__id_plaza = id_plaza
+    #
+    # @property
+    # def pin(self):
+    #     return self.__pin
+    #
+    # @pin.setter
+    # def pin(self, pin):
+    #     self.__pin = pin
+    #
+    # @property
+    # def fecha_salida(self):
+    #     return self.__fecha_salida
+    #
+    # @fecha_salida.setter
+    # def fecha_salida(self, fecha_salida):
+    #     self.__fecha_salida = fecha_salida
+    #
+    # @property
+    # def coste(self):
+    #     return self.__coste
+    #
+    # @coste.setter
+    # def coste(self, coste):
+    #     self.__coste = coste
 
 
     def __str__(self):

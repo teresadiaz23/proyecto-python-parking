@@ -2,8 +2,16 @@ from datetime import datetime
 
 from flask import Flask, render_template, abort, request
 from flask_bootstrap import Bootstrap
+from flask_sqlalchemy import SQLAlchemy
 
-from aplicacion.controllers.admin_controller import admin_controller
+from aplicacion import config
+
+
+app = Flask(__name__)
+app.config.from_object(config)
+Bootstrap(app)
+db = SQLAlchemy(app)
+
 from aplicacion.controllers.parking_controller import parking_controller
 from aplicacion.models import DatosErroneos
 from aplicacion.services.cliente_servicio import cliente_servicio
@@ -14,16 +22,14 @@ from aplicacion.services.parking_servicio import parking_servicio
 from aplicacion.models import AbonoNoEncontrado
 from aplicacion.models import ClienteNoEncontrado
 from aplicacion.services.abonado_servicio import abonado_servicio
-
-
-
-app = Flask(__name__)
-Bootstrap(app)
+from aplicacion.services.plaza_servicio import plaza_servicio
 
 @app.route('/')
 def index():
         #return "Bienvenido al parking de los Salesianos de Triana"
-
+        # clientes=ClienteAbonado.query.all()
+        # cliente_abonado_repositorio.lista_clientes = clientes
+        # abonados = cliente_abonado_repositorio.find_all()
         return render_template("index.html")
 
 
@@ -80,16 +86,16 @@ def retirar_cliente():
         #     # print(f"\nImporte a pagar: {total}€")
         #     # print("Puede retirar su vehículo")
         #     return render_template("./cliente/confirmacion.html", matricula=matricula, id=id, pin=pin, total=total)
-        try:
-            matricula = request.form.get("matricula")
-            id = int(request.form.get("id"))
-            pin = int(request.form.get("pin"))
-            total = cliente_servicio.retirar_vehiculo(matricula, id, pin)
-            if(total >= 0):
+        #try:
+        matricula = request.form.get("matricula")
+        id = int(request.form.get("id"))
+        pin = int(request.form.get("pin"))
+        total = cliente_servicio.retirar_vehiculo(matricula, id, pin)
+        if(total >= 0):
 
-                return render_template("./cliente/confirmacion.html", matricula=matricula, id=id, pin=pin, total=total)
-        except:
-           return render_template("./errores/error.html", error="Los datos introducidos no son correctos")
+            return render_template("./cliente/confirmacion.html", matricula=matricula, id=id, pin=pin, total=total)
+        #except:
+         #  return render_template("./errores/error.html", error="Los datos introducidos no son correctos")
         # except DatosErroneos:
         #     print("\nLos datos introducidos no son correctos")
 
@@ -115,11 +121,13 @@ def alta_abono():
             if(admin_servicio.alta_abono(dni, nombre, apellidos, num_tarjeta, email, matricula, tipo_vehiculo, tipo_abono)):
                 #print("\nHa obtenido un abono correctamente")
                 abono = abono_servicio.find_all()[len(abono_servicio.find_all()) - 1]
+                plaza = plaza_servicio.find_by_cliente(abono.cliente_abonado)
 
                 return render_template("./cliente/abono.html",
                                        dni=dni, nombre=nombre, apellidos=apellidos, num_tarjeta=num_tarjeta,
                                        email=email, matricula=matricula,
-                                       tipo_vehiculo=tipo_vehiculo, tipo_abono=tipo_abono, abono=abono)
+                                       tipo_vehiculo=tipo_vehiculo, tipo_abono=tipo_abono, abono=abono,
+                                       plaza=plaza)
         except:
             return render_template("./errores/error.html", error="No se ha podido generar el abono correctamente")
 
@@ -159,17 +167,17 @@ def depositar_abonados():
 def retirar_abonados():
     if request.method == 'POST':
 
-        try:
-            matricula = request.form.get("matricula")
-            id = int(request.form.get("id"))
-            pin = int(request.form.get("pin"))
-            if(abonado_servicio.retirar_abonados(matricula, id, pin)):
-                return render_template("./abonado/confirmacion.html", matricula=matricula, id=id, pin=pin,
+        #try:
+        matricula = request.form.get("matricula")
+        id = int(request.form.get("id"))
+        pin = int(request.form.get("pin"))
+        if(abonado_servicio.retirar_abonados(matricula, id, pin)):
+            return render_template("./abonado/confirmacion.html", matricula=matricula, id=id, pin=pin,
                                        mensaje="Puede retirar su vehículo")
                 # print("\nPuede retirar su vehículo")
 
-        except:
-            return render_template("./errores/error.html", error="No se encuentra ningún cliente abonado con esos datos")
+        #except:
+         #   return render_template("./errores/error.html", error="No se encuentra ningún cliente abonado con esos datos")
 
     else:
         return render_template("./abonado/abonado_retirar.html")
@@ -183,8 +191,9 @@ def consultar_abono():
             pin = int(request.form.get("pin"))
             if(abonado_servicio.obtener_abono(dni, pin) != None):
                 abono = parking_controller.imprimir_abono_dni(dni, pin)
+                plaza = plaza_servicio.find_by_cliente(abono.cliente_abonado)
                 return render_template("./abonado/abono.html", dni=dni, pin=pin,
-                                       abono=abono, mensaje="")
+                                       abono=abono, plaza=plaza, mensaje="")
 
         except:
             return render_template("./errores/error.html", error="No existe ningún abono con esos datos")
@@ -246,19 +255,20 @@ def modificar_datos_abono():
 @app.route('/abonado/abono/renovar/', methods=["get", "post"])
 def renovar_abono():
     if request.method == 'POST':
-        try:
-            dni = request.form.get("dni")
-            pin = int(request.form.get("pin"))
-            tipo_abono = request.form.get("tipo_abono")
+        #try:
+        dni = request.form.get("dni")
+        pin = int(request.form.get("pin"))
+        tipo_abono = request.form.get("tipo_abono")
 
-            if(admin_servicio.renovacion_abono(dni, pin, tipo_abono)):
-                #print("\nSu abono se ha renovado correctamente")
-                abono = parking_controller.imprimir_abono_dni(dni, pin)
-                return render_template("./abonado/abono.html", dni=dni, pin=pin, tipo_abono=tipo_abono, abono=abono,
-                                       mensaje="Su abono se ha renovado correctamente")
+        if(admin_servicio.renovacion_abono(dni, pin, tipo_abono)):
+                    #print("\nSu abono se ha renovado correctamente")
+            abono = parking_controller.imprimir_abono_dni(dni, pin)
+            plaza = plaza_servicio.find_by_cliente(abono.cliente_abonado)
+            return render_template("./abonado/abono.html", dni=dni, pin=pin, tipo_abono=tipo_abono, abono=abono,
+                                           plaza=plaza, mensaje="Su abono se ha renovado correctamente")
 
-        except:
-            return render_template("./errores/error.html", error="No existe ningún abono con esos datos")
+        #except:
+         #   return render_template("./errores/error.html", error="No existe ningún abono con esos datos")
             #print("\nNo existe ningún abono con esos datos")
         # except:
         #     return render_template("./errores/error.html", error="No se han podido modificar los datos")
@@ -270,16 +280,16 @@ def renovar_abono():
 @app.route('/abonado/abono/borrar/', methods=["get", "post"])
 def borrar_abono():
     if request.method == 'POST':
-        try:
-            dni = request.form.get("dni")
-            pin = int(request.form.get("pin"))
+        #try:
+        dni = request.form.get("dni")
+        pin = int(request.form.get("pin"))
 
-            if(admin_servicio.borrar_abono(dni, pin)):
+        if(admin_servicio.borrar_abono(dni, pin)):
                 #print("\nEl abono se ha borrado correctamente")
-                return render_template("./abonado/confirmacion.html", dni=dni, pin=pin,
+            return render_template("./abonado/confirmacion.html", dni=dni, pin=pin,
                                        mensaje="El abono se ha borrado correctamente")
-        except:
-            return render_template("./errores/error.html", error="No existe ningún abono con esos datos")
+        #except:
+         #   return render_template("./errores/error.html", error="No existe ningún abono con esos datos")
             #print("\nNo existe ningún abono con esos datos")
     else:
         return render_template("./abonado/abonado_borrar_abono.html")
@@ -296,7 +306,7 @@ def admin_index():
 @app.route('/admin/estado_parking/')
 def estado_parking():
 
-    lista_plazas = parking_servicio.find_all().lista_plazas
+    lista_plazas = parking_servicio.find_all_plazas()
     return render_template("./administrador/estado_parking.html", lista_plazas=lista_plazas)
 
 
@@ -328,6 +338,7 @@ def consulta_abonados():
         if(len(abono_servicio.find_all()) > 0):
             abonos = abono_servicio.find_all()
             total = admin_servicio.consulta_cobro_abonados()
+
         #     for abono in abono_servicio.find_all():
         #         print(f"\nAbono {i}\nTipo: {abono.tipo}\nId Plaza: {abono.cliente_abonado.id_plaza}\n"
         #               f"Fecha Activacion: {abono.fecha_activacion.day}/{abono.fecha_activacion.month}/{abono.fecha_activacion.year}\n"

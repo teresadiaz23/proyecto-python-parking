@@ -10,8 +10,9 @@ from aplicacion.models.vehiculo import Turismo, Motocicleta, MovilidadReducida
 from aplicacion.services.abonado_servicio import abonado_servicio
 from aplicacion.services.abono_servicio import abono_servicio
 from aplicacion.services.parking_servicio import parking_servicio
+from aplicacion.services.plaza_servicio import plaza_servicio
 from aplicacion.services.ticket_servicio import ticket_servicio
-
+from aplicacion.services.vehiculo_servicio import vehiculo_servicio
 
 
 class AdminServicio():
@@ -25,8 +26,9 @@ class AdminServicio():
         coste = []
 
         for ticket in ticket_servicio.find_all():
-            if(ticket.fecha_salida >= fecha1 and ticket.fecha_salida <= fecha2):
-                coste.append(ticket.coste)
+            if(ticket.fecha_salida != None):
+                if(ticket.fecha_salida >= fecha1 and ticket.fecha_salida <= fecha2):
+                    coste.append(ticket.coste)
 
         if(len(coste) > 0):
             for c in coste:
@@ -37,9 +39,9 @@ class AdminServicio():
 
     def consulta_cobro_abonados(self):
         total = 0
-        if(len(parking_servicio.find_all().dinero_abonos) > 0):
-            for d in parking_servicio.find_all().dinero_abonos:
-                total += d
+        if(parking_servicio.find_all().dinero_abonos > 0):
+
+                total += parking_servicio.find_all().dinero_abonos
 
         return round(total, 2)
 
@@ -47,15 +49,15 @@ class AdminServicio():
         confirmado = True
 
         if(tipo_vehiculo.lower() == "turismo"):
-            vehiculo = Turismo(matricula)
+            vehiculo = Turismo(matricula=matricula, tarifa=0.12)
             plaza = parking_servicio.plazas_libres_turismo()[0]
 
         elif(tipo_vehiculo.lower() == "motocicleta"):
-            vehiculo = Motocicleta(matricula)
+            vehiculo = Motocicleta(matricula=matricula, tarifa=0.08)
             plaza = parking_servicio.plazas_libres_moto()[0]
 
         elif(tipo_vehiculo.lower() == "movilidad reducida"):
-            vehiculo = MovilidadReducida(matricula)
+            vehiculo = MovilidadReducida(matricula=matricula, tarifa=0.10)
             plaza = parking_servicio.plazas_libres_movreducida()[0]
 
         else:
@@ -65,29 +67,43 @@ class AdminServicio():
             id = plaza.id
 
 
-        cliente = ClienteAbonado(dni, nombre, apellidos, num_tarjeta, email, vehiculo, tipo_abono, id)
+        vehiculo_servicio.save(vehiculo)
+        cliente = ClienteAbonado(dni=dni, nombre=nombre, apellidos=apellidos, num_tarjeta=num_tarjeta,
+                                 email=email, VehiculoId=vehiculo.id)
+
+
+
         pin = randint(111111, 999999)
         fecha = datetime.now()
         if(tipo_abono.lower() == "mensual"):
-            abono = Abono(pin, tipo_abono, datetime.now(), fecha + relativedelta(months=1), cliente, 25)
+            abono = Abono(pin=pin, tipo=tipo_abono, fecha_activacion=datetime.now(),
+                          fecha_cancelacion=fecha + relativedelta(months=1), precio=25)
 
         elif(tipo_abono.lower() == "trimestral"):
-            abono = Abono(pin, tipo_abono, datetime.now(), fecha + relativedelta(months=3), cliente, 70)
+            abono = Abono(pin=pin, tipo=tipo_abono, fecha_activacion=datetime.now(),
+                          fecha_cancelacion=fecha + relativedelta(months=3), precio=70)
 
         elif(tipo_abono.lower() == "semestral"):
-            abono = Abono(pin, tipo_abono, datetime.now(), fecha + relativedelta(months=6), cliente, 130)
+            abono = Abono(pin=pin, tipo=tipo_abono, fecha_activacion=datetime.now(),
+                          fecha_cancelacion=fecha + relativedelta(months=6), precio=130)
 
         elif(tipo_abono.lower() == "anual"):
-            abono = Abono(pin, tipo_abono, datetime.now(), fecha + relativedelta(years=1), cliente, 200)
+            abono = Abono(pin=pin, tipo=tipo_abono, fecha_activacion=datetime.now(),
+                          fecha_cancelacion=fecha + relativedelta(years=1), precio=200)
 
         else:
             confirmado = False
 
         if(confirmado):
             abonado_servicio.save(cliente)
+            abono.ClienteId = cliente.id
             abono_servicio.save(abono)
-            plaza.cliente = cliente
-            parking_servicio.find_all().dinero_abonos.append(abono.precio)
+            plaza.ClienteId = cliente.id
+            plaza_servicio.save(plaza)
+            # plaza.cliente = cliente
+            #parking_servicio.find_all().dinero_abonos.append(abono.precio)
+            parking_servicio.find_all().dinero_abonos += abono.precio
+            parking_servicio.edit(parking_servicio.find_all())
 
         else:
             raise DatosErroneos
@@ -104,28 +120,28 @@ class AdminServicio():
             if(tipo_abono.lower() == "mensual"):
                 abono.fecha_cancelacion = abono.fecha_cancelacion + relativedelta(months=1)
                 abono.tipo = tipo_abono
-                cliente.abono = tipo_abono
+                #cliente.abono = tipo_abono
                 abono.precio = 25
                 modificado = True
 
             elif(tipo_abono.lower() == "trimestral"):
                 abono.fecha_cancelacion = abono.fecha_cancelacion + relativedelta(months=3)
                 abono.tipo = tipo_abono
-                cliente.abono = tipo_abono
+                #cliente.abono = tipo_abono
                 abono.precio = 70
                 modificado = True
 
             elif(tipo_abono.lower() == "semestral"):
                 abono.fecha_cancelacion = abono.fecha_cancelacion + relativedelta(months=6)
                 abono.tipo = tipo_abono
-                cliente.abono = tipo_abono
+                #cliente.abono = tipo_abono
                 abono.precio = 130
                 modificado = True
 
             elif(tipo_abono.lower() == "anual"):
                 abono.fecha_cancelacion = abono.fecha_cancelacion + relativedelta(years=1)
                 abono.tipo = tipo_abono
-                cliente.abono = tipo_abono
+                #cliente.abono = tipo_abono
                 abono.precio = 200
                 abono_servicio.edit(abono)
                 modificado = True
@@ -134,8 +150,11 @@ class AdminServicio():
 
         if(not modificado):
             raise DatosErroneos
+        else:
+            abono_servicio.edit(abono)
 
-        parking_servicio.find_all().dinero_abonos.append(abono.precio)
+        parking_servicio.find_all().dinero_abonos += abono.precio
+        parking_servicio.edit(parking_servicio.find_all())
         return modificado
 
     def modificar_datos_abono(self, dni, pin, nombre, apellidos, num_tarjeta, email):
@@ -177,9 +196,12 @@ class AdminServicio():
 
         if(abono == abono2 and abono != None):
             abono_servicio.delete(abono)
-            for plaza in parking_servicio.find_all().lista_plazas:
+
+            for plaza in parking_servicio.find_all_plazas():
                 if(plaza.cliente == cliente):
-                    plaza.cliente = None
+                    plaza.ClienteId = -1
+                    plaza_servicio.edit(plaza)
+                    abonado_servicio.delete(cliente)
 
             borrado = True
         else:
