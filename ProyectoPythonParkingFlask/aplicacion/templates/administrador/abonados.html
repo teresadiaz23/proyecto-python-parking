@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Índice{% endblock %}
+{% block title %}Ver Abonados{% endblock %}
 {% block contenido %}
 	    <h2>Abonados</h2>
 <table class="table table-striped">
@@ -7,7 +7,6 @@
             <tr>
                 <th scope="col">ID Abono</th>
               <th scope="col">Tipo</th>
-<!--              <th scope="col">Id Plaza</th>-->
               <th scope="col">Fecha Activacion</th>
                 <th scope="col">Fecha Caducidad</th>
               <th scope="col">Precio</th>
@@ -19,7 +18,6 @@
                 <tr>
                     <th scope="row">{{abono.id}}</th>
                     <td>{{abono.tipo.capitalize()}}</td>
-<!--                    <td>{{abono.cliente_abonado.id_plaza}}</td>-->
                     <td>{{abono.fecha_activacion.day}}/{{abono.fecha_activacion.month}}/{{abono.fecha_activacion.year}}</td>
                     <td>{{abono.fecha_cancelacion.day}}/{{abono.fecha_cancelacion.month}}/{{abono.fecha_cancelacion.year}}</td>
 
