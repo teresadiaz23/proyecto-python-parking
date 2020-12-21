@@ -1,10 +1,12 @@
 {% extends "base.html" %}
 {% block title %}Índice Administrador{% endblock %}
 {% block contenido %}
-	    <h2 class="mb-4 text-center">¿Qué desea hacer?</h2>
-    <div class="col-12 d-flex justify-content-center">
-        <ul class="list-group col-6 mb-5">
-          <li class="list-group-item list-group-item-action list-group-item-info">
+
+    <div class="row">
+  	<div class="col-md-3">
+        <ul class="list-group mb-5 rounded">
+            <h3 class="mb-4 text-center">Zona Administración</h3>
+          <li class="list-group-item list-group-item-action list-group-item-info rounded">
               <a class="nav-link text-dark" href="{{url_for('estado_parking')}}">Ver el estado del parking</a>
           </li>
           <li class="list-group-item list-group-item-action list-group-item-info">
@@ -22,5 +24,9 @@
 
         </ul>
     </div>
+  	<div class="col-md-9">
+	    {% block contenido2 %}{% endblock %}
+  	</div>
+  </div>
 
 {% endblock %}
