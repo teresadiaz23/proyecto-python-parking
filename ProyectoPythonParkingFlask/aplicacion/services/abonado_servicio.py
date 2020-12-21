@@ -75,7 +75,7 @@ class AbonadoServicio():
         abono = abono_servicio.find_by_pin(pin)
         abono2 = abono_servicio.find_by_cliente(cliente)
 
-        if(abono == abono2):
+        if(abono != None and abono == abono2):
             return abono
 
         else:

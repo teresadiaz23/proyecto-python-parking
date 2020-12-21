@@ -1,6 +1,6 @@
 # Proyecto Parking en Python en consola
 ## Información sobre el proyecto
-El proyecto consiste en el uso de un parking por parte de clientes normales y clientes abonados, y de la gestión del mismo por parte de un admnistrador.
+El proyecto consiste en el uso de un parking por parte de clientes normales y clientes abonados, y de la gestión del mismo por parte de un administrador.
 1. En el menú principal hay 3 zonas de acceso, una para un cliente normal, otra para un cliente abonado y otra para el administrador.
 2. Se guardan los datos de los clientes abonados, los tickets, los abonos, las plazas y un parking.
 3. Para acceder a la zona de administración hay que introducir la contraseña 1234.

@@ -1,21 +1,30 @@
 {% extends "base.html" %}
 {% block title %}Índice Cliente{% endblock %}
 {% block contenido %}
-	    <h2 class="mb-4">¿Qué desea hacer?</h2>
-
-        <ul class="list-group col-4">
-          <li class="list-group-item">
-              <a class="nav-link" href="{{url_for('depositar_cliente')}}">Depositar un vehículo</a>
+<div class="row">
+  	<div class="col-md-3">
+        <ul class="list-group">
+            <h3 class="mb-4 text-center">Zona Cliente</h3>
+          <li class="list-group-item list-group-item-action list-group-item-primary rounded">
+              <a class="nav-link text-dark" href="{{url_for('depositar_cliente')}}">Depositar un vehículo</a>
           </li>
-          <li class="list-group-item">
-              <a class="nav-link" href="{{url_for('retirar_cliente')}}">Retirar un vehículo</a>
+          <li class="list-group-item list-group-item-action list-group-item-primary">
+              <a class="nav-link text-dark" href="{{url_for('retirar_cliente')}}">Retirar un vehículo</a>
           </li>
-          <li class="list-group-item">
-              <a class="nav-link" href="{{url_for('alta_abono')}}">Obtener un abono</a>
+          <li class="list-group-item list-group-item-action list-group-item-primary">
+              <a class="nav-link text-dark" href="{{url_for('alta_abono')}}">Obtener un abono</a>
           </li>
         </ul>
-
+    </div>
+  	<div class="col-md-9">
+	    {% block contenido2 %}{% endblock %}
+  	</div>
+  </div>
 
 
 
 {% endblock %}
+
+
+
+

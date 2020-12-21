@@ -1,6 +1,6 @@
-{% extends "base.html" %}
+{% extends "./abonado/abonado_index.html" %}
 {% block title %}Abono{% endblock %}
-{% block contenido %}
+{% block contenido2 %}
 {% if mensaje == "" %}
      <h2>Consulta de abono</h2>
 
@@ -18,7 +18,7 @@
 		</tr>
 		<tr>
 			<td class="pr-5">Tipo</td>
-			<td>{{abono.tipo}}</td>
+			<td>{{abono.tipo.capitalize()}}</td>
 		</tr>
 		<tr>
 			<td class="pr-5">Pin</td>

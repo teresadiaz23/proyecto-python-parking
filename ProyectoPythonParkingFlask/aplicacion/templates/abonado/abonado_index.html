@@ -1,33 +1,36 @@
 {% extends "base.html" %}
 {% block title %}Índice Abonado{% endblock %}
 {% block contenido %}
-	    <h2>¿Qué desea hacer?</h2>
-
-        <ul class="list-group col-4 mb-5">
-          <li class="list-group-item">
-              <a class="nav-link" href="{{url_for('depositar_abonados')}}">Depositar un vehículo</a>
+<div class="row">
+  	<div class="col-md-3">
+        <ul class="list-group mb-5">
+            <h3 class="mb-4">Zona Cliente Abonado</h3>
+          <li class="list-group-item list-group-item-action list-group-item-success rounded">
+              <a class="nav-link text-dark" href="{{url_for('depositar_abonados')}}">Depositar un vehículo</a>
           </li>
-          <li class="list-group-item">
-              <a class="nav-link" href="{{url_for('retirar_abonados')}}">Retirar un vehículo</a>
+          <li class="list-group-item list-group-item-action list-group-item-success">
+              <a class="nav-link text-dark" href="{{url_for('retirar_abonados')}}">Retirar un vehículo</a>
           </li>
-          <li class="list-group-item">
-              <a class="nav-link" href="{{url_for('consultar_abono')}}">Ver su abono</a>
+          <li class="list-group-item list-group-item-action list-group-item-success">
+              <a class="nav-link text-dark" href="{{url_for('consultar_abono')}}">Ver su abono</a>
           </li>
-            <li class="list-group-item">
-              <a class="nav-link" href="{{url_for('consultar_datos_personales')}}">Ver sus datos personales</a>
+            <li class="list-group-item list-group-item-action list-group-item-success">
+              <a class="nav-link text-dark" href="{{url_for('consultar_datos_personales')}}">Ver sus datos personales</a>
           </li>
-          <li class="list-group-item">
-              <a class="nav-link" href="{{url_for('modificar_datos_abono')}}">Modificar datos personales</a>
+          <li class="list-group-item list-group-item-action list-group-item-success">
+              <a class="nav-link text-dark" href="{{url_for('modificar_datos_abono')}}">Modificar datos personales</a>
           </li>
-          <li class="list-group-item">
-              <a class="nav-link" href="{{url_for('renovar_abono')}}">Renovar su abono</a>
+          <li class="list-group-item list-group-item-action list-group-item-success">
+              <a class="nav-link text-dark" href="{{url_for('renovar_abono')}}">Renovar su abono</a>
           </li>
-            <li class="list-group-item">
-              <a class="nav-link" href="{{url_for('borrar_abono')}}">Borrar su abono</a>
+            <li class="list-group-item list-group-item-action list-group-item-success">
+              <a class="nav-link text-dark" href="{{url_for('borrar_abono')}}">Borrar su abono</a>
           </li>
         </ul>
-
-
-
+    </div>
+  	<div class="col-md-9">
+	    {% block contenido2 %}{% endblock %}
+  	</div>
+  </div>
 
 {% endblock %}
