@@ -18,4 +18,4 @@ El proyecto consiste en el uso de un parking por parte de clientes normales y cl
     - Abrir la consola y ejecutar el siguiente comando: *pip install -r requirements.txt* para instalar las librerias necesarias.
     - Luego ejecutar *python manage.py runserver* para iniciar la aplicación y entrar en localhost:5000.
 11. Para ver las tablas y los datos guardados en la base de datos, abrir el archivo dbase.bd con sqlite browser o alguno similar.
-12. Para borrar las tablas se ejecuta *python manage.py drop_tables*, y para crearla y guardar datos iniciales se ejecuta *python manage.py add_data_tables*.
+12. Para borrar las tablas se ejecuta *python manage.py drop_tables*, y para crearlas y guardar datos iniciales se ejecuta *python manage.py add_data_tables*.

@@ -172,6 +172,7 @@ def consultar_abono():
                 return render_template("./abonado/abono.html", dni=dni, pin=pin,
                                        abono=abono, plaza=plaza, mensaje="")
 
+
         except:
             return render_template("./errores/error.html", error="No existe ningún abono con esos datos")
 
@@ -290,17 +291,20 @@ def estado_parking():
 def facturacion():
 
     if request.method == 'POST':
-        fecha1 = request.form.get("fecha1")
-        fecha2 = request.form.get("fecha2")
+        try:
+            fecha1 = request.form.get("fecha1")
+            fecha2 = request.form.get("fecha2")
 
-        lista1 = fecha1.split(",")
-        lista2 = fecha2.split(",")
-        fecha1 = datetime(int(lista1[0]), int(lista1[1]), int(lista1[2]), int(lista1[3]), int(lista1[4]))
-        fecha2 = datetime(int(lista2[0]), int(lista2[1]), int(lista2[2]), int(lista2[3]), int(lista2[4]))
-        fac = admin_servicio.facturacion(fecha1, fecha2)
+            lista1 = fecha1.split(",")
+            lista2 = fecha2.split(",")
+            fecha1 = datetime(int(lista1[0]), int(lista1[1]), int(lista1[2]), int(lista1[3]), int(lista1[4]))
+            fecha2 = datetime(int(lista2[0]), int(lista2[1]), int(lista2[2]), int(lista2[3]), int(lista2[4]))
+            fac = admin_servicio.facturacion(fecha1, fecha2)
 
 
-        return render_template("./administrador/facturacion.html", fecha1=fecha1, fecha2=fecha2, fac=fac)
+            return render_template("./administrador/facturacion.html", fecha1=fecha1, fecha2=fecha2, fac=fac)
+        except:
+            return render_template("./errores/error.html", error="El formato de las fechas no es correcto")
     else:
        return render_template("./administrador/ver_facturacion.html")
 
